@@ -1,0 +1,5 @@
+<svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 21 20">
+	<path class="cls-b" fill="currentColor" d="M10 20c5.523 0 10-4.477 10-10S15.523 0 10 0 0 4.477 0 10s4.477 10 10 10z" />
+	<path class="cls-p" stroke="currentColor" stroke-width=".92857" d="M15.571 14.643v-6.5L10.93 3.5H6.286a1.866 1.866 0 00-1.857 1.857v9.286c0 1.018.838 1.857 1.857 1.857h7.428a1.866 1.866 0 001.857-1.857zM6.286 10h4.643m-4.643 1.857h6.5m-6.5 1.857H9.07" />
+	<path class="cls-p" stroke="currentColor" stroke-width=".92857" d="M10.929 3.5v2.786c0 1.018.838 1.857 1.857 1.857h2.785" />
+</svg>

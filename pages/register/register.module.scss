@@ -1,0 +1,10 @@
+.form {
+	max-width: 800px;
+	padding: 100px;
+
+	button {
+		&[type='submit'] {
+			margin: 20px auto 0 0;
+		}
+	}
+}

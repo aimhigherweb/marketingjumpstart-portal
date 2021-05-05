@@ -1,0 +1,5 @@
+<svg stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 64 64">
+	<path class="cls-b" fill="currentColor" d="M31.962 63.925c17.653 0 31.963-14.31 31.963-31.962C63.925 14.31 49.615 0 31.962 0 14.31 0 0 14.31 0 31.963c0 17.652 14.31 31.962 31.962 31.962z" />
+	<path class="cls-p" fill="currentColor" d="M14.518 12.56l-2.881 7.39v29.566H21.8l.013 5.543h5.71l5.364-5.543h8.315l11.087-10.95V12.56h-37.77zM48.593 36.58l-6.467 6.467H31.963l-5.544 5.544v-5.544h-8.315V16.255h30.49v20.326z" />
+	<path class="cls-p" fill="currentColor" d="M38.43 23.646h3.696v11.087H38.43zM28.267 23.646h3.696v11.087h-3.696z" />
+</svg>

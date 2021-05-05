@@ -1,0 +1,7 @@
+.input {
+	flex-basis: 100%;
+	composes: input from '../input/input.module.scss';
+	min-height: 8em;
+	margin-top: 0;
+	padding: 15px 25px;
+}

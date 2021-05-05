@@ -1,0 +1,37 @@
+{
+  "name": "marketingjumpstart-portal",
+  "version": "1.0.0",
+  "author": "AimHigher Web <amy@aimhigherweb.design> (https://aimhigherweb.design)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npm run dev",
+    "export": "next export",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.8",
+    "date-fns": "^2.17.0",
+    "gotrue-js": "^0.9.29",
+    "graphql": "^15.5.0",
+    "next": "10.0.6",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-inlinesvg": "^2.2.2",
+    "react-query": "^3.8.2",
+    "sass": "^1.32.6"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.22.0",
+    "stylelint": "^13.9.0",
+    "stylelint-config-property-sort-order-smacss": "^7.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.19.0"
+  }
+}

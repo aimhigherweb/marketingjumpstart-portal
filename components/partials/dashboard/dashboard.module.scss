@@ -1,0 +1,23 @@
+.dashboard {
+	display: grid;
+	grid-template-columns: 1fr minmax(auto, 400px);
+	grid-template-rows: repeat(var(--grid_rows), auto);
+	align-content: start;
+
+	h2 {
+		text-transform: none;
+
+		&:after {
+			content: normal;
+		}
+	}
+}
+
+.docs {
+	grid-column: 2;
+	grid-row: 1 / span var(--grid_rows);
+
+	h2 {
+		margin: 0;
+	}
+}

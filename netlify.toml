@@ -1,0 +1,9 @@
+[build]
+  base = "."
+  command = "npm run build"
+  publish = "out"
+  functions = "functions"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+[[plugins]]
+  package = "netlify-plugin-next-dynamic"

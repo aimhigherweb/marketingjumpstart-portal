@@ -1,0 +1,13 @@
+.icon {
+	height: 1.5em;
+	fill: none;
+	color: var.$primary;
+
+	*[class$='cls-p'] {
+		color: var.$white;
+	}
+
+	*[class$='cls-b'] {
+		color: var.$primary;
+	}
+}

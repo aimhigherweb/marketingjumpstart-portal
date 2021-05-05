@@ -1,0 +1,97 @@
+.input {
+	position: absolute;
+	z-index: -100;
+	opacity: 0;
+
+	&[checked] {
+		+ label {
+			&:after {
+				content: '';
+			}
+		}
+	}
+
+	&:focus {
+		+ label {
+			outline: 3px solid var.$primary;
+		}
+	}
+}
+
+.input_checkbox {
+	&[checked] {
+		+ label {
+			&:after {
+				content: '✓';
+			}
+		}
+	}
+}
+
+.label {
+	display: flex;
+	position: relative;
+	align-items: center;
+	width: 100%;
+	margin: 26px 10px;
+	font-style: italic;
+	font-weight: 400;
+	text-transform: none;
+	cursor: pointer;
+	composes: label from '../label/label.module.scss';
+
+	&:before, &:after {
+		display: block;
+		flex: 0 0 auto;
+	}
+
+	&:before {
+		content: '';
+		width: 20px;
+		height: 20px;
+		margin-right: 1ch;
+		border: 2px solid #48abdd;
+		background: #48abdd;
+	}
+
+	&:after {
+		position: absolute;
+		left: 3px;
+		color: var.$neutral;
+		font-size: 1.3em;
+	}
+
+	@media(min-width: 60em) {
+		&:before {
+			width: 25px;
+			height: 25px;
+		}
+	}
+
+	@media(min-width: 90em) {
+		&:after {
+			font-size: 1.1em;
+		}
+	}
+}
+
+.label_radio {
+	&:before, &:after {
+		border-radius: 50%;
+	}
+
+	&:after {
+		left: 4px;
+		width: 16px;
+		height: 16px;
+		background: #ffffff;
+	}
+
+	@media(min-width: 60em) {
+		&:after {
+			left: 5px;
+			width: 19px;
+			height: 19px;
+		}
+	}
+}

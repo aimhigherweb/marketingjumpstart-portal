@@ -1,0 +1,55 @@
+.user {
+	display: flex;
+	align-items: center;
+	border: none;
+	background: transparent;
+	font-size: 0.8em;
+
+	svg {
+		margin-left: 20px;
+		color: inherit;
+	}
+}
+
+.button {
+	--button_background: #{var.$primary};
+	--button_border: #{var.$primary};
+	--button_text: #{var.$primary};
+
+	margin-left: 10px;
+	padding: 5px 10px;
+	font-size: 1em;
+	font-weight: 400;
+	text-transform: none;
+
+	composes: button from '../../../../components/parts/forms/button/button.module.scss';
+}
+
+.nav {
+	position: absolute;
+	z-index: 5;
+	top: calc(100% - 20px);
+	right: 20px;
+	padding: 10px 20px;
+	background: var.$white;
+	box-shadow: 0 2px 12px rgba(37, 51, 66, 0.15);
+	font-size: 0.7em;
+	text-align: right;
+
+	em {
+		display: block;
+	}
+
+	li {
+		padding: 10px;
+	}
+
+	a {
+		color: var.$neutral;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

@@ -1,0 +1,20 @@
+.label {
+	display: block;
+	min-width: 100px;
+	margin: 40px 0 16px;
+	font-family: var.$font_headings;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+
+	&[required] {
+		&:after {
+			content: '*';
+			margin-left: 1ch;
+		}
+	}
+
+	@media(min-width: 60em) {
+		min-width: 120px;
+	}
+}

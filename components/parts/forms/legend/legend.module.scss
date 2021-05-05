@@ -1,0 +1,4 @@
+.label {
+	composes: label from '../label/label.module.scss';
+	width: 100%;
+}
