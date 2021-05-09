@@ -1,11 +1,16 @@
 .main {
 	display: grid;
 	grid-template-columns: max-content 1fr;
-
 	background: var.$grey_light;
 
 	> *:not(.sidebar) {
 		padding: 20px 40px;
 		box-shadow: 0 2px 12px rgba(37, 51, 66, 0.15);
 	}
+}
+
+.layout {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	min-height: 100vh;
 }

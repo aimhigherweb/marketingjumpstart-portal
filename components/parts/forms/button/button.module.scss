@@ -7,13 +7,12 @@
 	background: var(--button_background);
 	color: var.$white;
 	color: var(--button_text);
-	font-size: 1.25em;
-	font-weight: 700;
+	font-size: 1em;
+	font-weight: 600;
 	line-height: 1;
-	text-transform: uppercase;
 
 	&:hover {
-		border-color: var(--button_text);
+		border-color: var(--button_border);
 		background: var(--button_text);
 		color: var(--button_background);
 	}

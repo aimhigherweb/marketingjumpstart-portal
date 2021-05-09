@@ -6,13 +6,10 @@
 	--primary: #{var.$primary};
 	--secondary: #{var.$secondary};
 	--neutral: #{var.$neutral};
-
 	--green: #{var.$green};
 	--red: #{var.$red};
 	--orange: #{var.$orange};
 
-
-	/* Buttons */
 	--button_border: #{var.$primary};
 	--button_background: #{var.$primary};
 	--button_text: #{var.$white};
@@ -33,10 +30,4 @@ body {
 .sr-only {
 	position: absolute;
 	right: -200vw;
-}
-
-#__next {
-	display: grid;
-	grid-template-rows: auto 1fr auto;
-	min-height: 100vh;
 }

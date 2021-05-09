@@ -7,8 +7,8 @@ module.exports = {
 	target: `serverless`,
 	sassOptions: {
 		prependData: `
-			@use "styles/variables.scss" as var;
-			@use "styles/mixins.scss";
+			@use "styles/_variables.scss" as var;
+			@use "styles/_mixins.scss";
 		`,
 	},
 	webpack: (config, options) => {

@@ -47,7 +47,7 @@ const PasswordReset = ({ attr }) => {
 							defaultValue={name}
 							name="name"
 						/>
-						<Label htmlFor="email">Email address</Label>
+						<Label htmlFor="email">Email Address</Label>
 						<Input
 							type="email"
 							id="email"

@@ -2,8 +2,8 @@ import { Fragment, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
-import Button from '../../../../components/parts/forms/button';
-import Icon from '../../../../components/parts/icon';
+import Button from "../../forms/button";
+import Icon from "../../icon";
 
 import { UserContext } from '../../../../pages/_app';
 import { login, logout } from '../../../../utils/auth/netlifyIdentity';
@@ -35,7 +35,7 @@ const Login = () => {
 				className={styles.user}
 				onClick={() => toggleMenu(!menuOpen)}
 			>
-				Hi {name} 👋
+				Hi {name}
 				<Icon icon="chevron" />
 			</Button>
 			{menuOpen

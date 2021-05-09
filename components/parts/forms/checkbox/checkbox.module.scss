@@ -50,14 +50,14 @@
 		width: 20px;
 		height: 20px;
 		margin-right: 1ch;
-		border: 2px solid #48abdd;
-		background: #48abdd;
+		border: 2px solid var.$primary;
+		background: var.$primary;
 	}
 
 	&:after {
 		position: absolute;
 		left: 3px;
-		color: var.$neutral;
+		color: var.$white;
 		font-size: 1.3em;
 	}
 
@@ -84,7 +84,7 @@
 		left: 4px;
 		width: 16px;
 		height: 16px;
-		background: #ffffff;
+		background: var.$white;
 	}
 
 	@media(min-width: 60em) {

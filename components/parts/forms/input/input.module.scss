@@ -2,14 +2,14 @@
 	display: block;
 	flex: 1 1 100%;
 	margin: 0;
-	padding: 5px 25px;
-	border: 2px solid #48abdd;
-	background: #48abdd;
-	color: #0d0d0d;
+	padding: 10px 25px;
+	border: 2px solid var.$secondary;
+	background: var.$white;
+	color: var.$neutral;
 	font-size: 1em;
 
 	&::placeholder {
-		color: #0d0d0d;
+		color: var.$neutral;
 		font-style: italic;
 	}
 

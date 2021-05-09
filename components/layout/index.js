@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import Header from '../partials/header';
 import Login from '../parts/user/login';
+import Sidebar from '../partials/sidebar';
 
 import styles from './layout.module.scss';
 
@@ -10,18 +11,19 @@ import styles from './layout.module.scss';
 const Layout = ({
 	children, meta
 }) => (
-	<Fragment>
+	<div class={styles.layout}>
 		<Header>
 			<Login />
 		</Header>
 		<main className={styles.main}>
+			<Sidebar />
 			{children}
 		</main>
 
 		<Head>
 			<script src="https://apis.google.com/js/client:platform.js"></script>
 		</Head>
-	</Fragment>
+	</div>
 );
 
 export default Layout;

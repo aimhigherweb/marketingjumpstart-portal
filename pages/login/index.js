@@ -6,7 +6,7 @@ import { UserContext } from '../_app';
 import Layout from '../../components/layout';
 
 import {
-	Form, Input, Label, Button, Checkbox, Legend
+	Button
 } from '../../components/parts/forms';
 import Login from '../../components/parts/user/loginForm';
 

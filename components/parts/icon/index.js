@@ -19,6 +19,7 @@ import Success from "../../../src/img/icons/success.svg";
 import Twitch from "../../../src/img/icons/twitch.svg";
 import Twitter from "../../../src/img/icons/twitter.svg";
 import Chevron from '../../../src/img/icons/chevron_down.svg';
+import Dashboard from '../../../src/img/icons/dashboard.svg';
 import styles from './icon.module.scss';
 
 const Icon = ({ icon, className }) => {
@@ -87,6 +88,9 @@ const Icon = ({ icon, className }) => {
 		case `chevron`:
 		case `down`:
 			Img = (props) => (<Chevron {...props} />);
+			break;
+		case `dashboard`:
+			Img = (props) => <Dashboard {...props} />;
 			break;
 	}
 
