@@ -11,7 +11,7 @@ import styles from './layout.module.scss';
 const Layout = ({
 	children, meta
 }) => (
-	<div class={styles.layout}>
+	<div className={styles.layout}>
 		<Header>
 			<Login />
 		</Header>
@@ -22,6 +22,7 @@ const Layout = ({
 
 		<Head>
 			<script src="https://apis.google.com/js/client:platform.js"></script>
+			<script src="https://apis.google.com/js/api.js"></script>
 		</Head>
 	</div>
 );

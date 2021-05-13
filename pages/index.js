@@ -32,8 +32,8 @@ const IndexPage = () => {
 			{loggedIn
 				? <div>
 					<p>You are already logged in as {name} (<em>{email}</em>)</p>
-					<Button onClick={() => logout(logoutSuccess)}>Log Out</Button>
-					<Link href="/dashboard"><a>Proceed to Dashboard</a></Link>
+					<Button className={styles.button} onClick={() => logout(logoutSuccess)}>Log Out</Button>
+					<Link href="/dashboard"><a className={styles.button}>Proceed to Dashboard</a></Link>
 				</div>
 				: <Login
 					{...{ loginSuccess }}

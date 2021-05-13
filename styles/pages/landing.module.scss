@@ -3,8 +3,23 @@
 	margin: 0 auto;
 	padding: 50px;
 	text-align: center;
+
+	*:not(form) {
+		.button {
+			margin: 20px;
+		}
+	}
 }
 
 .logo {
 	width: 200px;
+}
+
+.button {
+	composes: button from '../../components/parts/forms/button/button.module.scss';
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
 }
