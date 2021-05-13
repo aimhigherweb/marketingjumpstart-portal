@@ -3,7 +3,7 @@
   command = "npm run build"
   publish = "out"
 [functions]
-  directory = "api"
+  directory = "YOUR_BASE_DIRECTORY/api/"
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 [[plugins]]
