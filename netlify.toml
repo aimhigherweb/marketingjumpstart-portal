@@ -5,5 +5,3 @@
   functions = "api"
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-[[plugins]]
-  package = "netlify-plugin-next-dynamic"
