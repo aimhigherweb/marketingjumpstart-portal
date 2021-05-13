@@ -1,25 +1,19 @@
 const { google } = require(`googleapis`);
 
-const drive = () => {
+export default async (req, res) => {
 	const auth = new google.auth.GoogleAuth({
-		keyFile: `/marketingjumpstart.key.json`,
-		scopes: [`https://www.googleapis.com/auth/cloud-platform`]
+		credentials: JSON.parse(process.env.NEXT_GOOGLE_CREDS),
+		scopes: [`https://www.googleapis.com/auth/drive.readonly`]
 	});
-
-	console.log(google.drive({
+	const drive = google.drive({
 		version: `v3`,
 		auth
-	}));
+	});
 
-	return {};
-};
+	const files = await drive.files.list({
+		pageSize: 10,
+		supportsAllDrives: true
+	});
 
-exports.handler = (event, context) => {
-	context.log(event);
-	context.log(context);
-
-	return {
-		statusCode: 200,
-		body: JSON.stringify(drive)
-	};
+	res.status(200).json(files.data);
 };
