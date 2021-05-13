@@ -1,16 +1,17 @@
-// const { google } = require(`googleapis`);
+const { google } = require(`googleapis`);
 
 const drive = () => {
-	// const credentials = JSON.parse(process.env.NEXT_GOOGLE_CREDS);
-	// const client = google.auth.getClient({
-	// 	credentials,
-	// 	scopes: [`https://www.googleapis.com/auth/drive.readonly`]
-	// });
+	const auth = new google.auth.GoogleAuth({
+		keyFile: `/marketingjumpstart.key.json`,
+		scopes: [`https://www.googleapis.com/auth/cloud-platform`]
+	});
 
-	// return google.drive({
-	// 	version: `v3`,
-	// 	auth: client
-	// });
+	console.log(google.drive({
+		version: `v3`,
+		auth
+	}));
+
+	return {};
 };
 
 exports.handler = (event, context) => {
@@ -19,6 +20,6 @@ exports.handler = (event, context) => {
 
 	return {
 		statusCode: 200,
-		body: drive
+		body: JSON.stringify(drive)
 	};
 };
