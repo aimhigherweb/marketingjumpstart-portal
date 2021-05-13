@@ -13,4 +13,12 @@ const drive = () => {
 	});
 };
 
-export default drive;
+exports.handler = (event, context) => {
+	console.log(event);
+	console.log(context);
+
+	return {
+		statusCode: 200,
+		body: drive
+	};
+};
