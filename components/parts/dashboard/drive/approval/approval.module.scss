@@ -1,0 +1,63 @@
+.button {
+	composes: button from '../../../forms/button/button.module.scss';
+	margin: 10px 0;
+}
+
+.items {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+
+	li {
+		position: relative;
+		max-width: 200px;
+		margin: 10px;
+		padding: 10px;
+		border: 1px solid var.$grey_light;
+
+		&:hover {
+			background: var.$primary;
+			color: var.$white;
+		}
+	}
+
+	figure {
+		width: auto;
+		max-width: 100%;
+		margin: 0;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	figcaption {
+		color: inherit;
+	}
+
+	a {
+		color: inherit;
+		font-size: 0.6em;
+		text-decoration: none;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+	}
+}
+
+.file {
+	display: block;
+	width: 150px;
+	max-width: unset;
+	height: auto;
+	margin: 0 auto 10px;
+}

@@ -4,6 +4,10 @@ import { Fragment } from 'react';
 import fetchFiles from '../../../../../utils/drive/fetch';
 import { APPROVE_SOCIALS } from '../../../../../utils/cms/social_media';
 
+import Icon from '../../../icon';
+
+import styles from './approval.module.scss';
+
 const Approvals = ({ folder, id }) => {
 	const { loading, data, error } = useQuery([
 		`files`,
@@ -25,8 +29,13 @@ const Approvals = ({ folder, id }) => {
 
 	return (
 		<Fragment>
-			<button onClick={() => approveSocials({ ...details })}>Approve</button>
-			<ul>
+			<button
+				className={styles.button}
+				onClick={() => approveSocials({ ...details })}
+			>
+				Approve
+			</button>
+			<ul className={styles.items}>
 				{data && data?.files?.map((file) => (
 					<li key={JSON.stringify(file)}>
 						<Preview {...file} />
@@ -40,11 +49,19 @@ const Approvals = ({ folder, id }) => {
 const Preview = ({ mimeType, ...props }) => {
 	if (RegExp(/^image\//).test(mimeType)) return <Image {...props} />;
 
-	return <a target="_blank" href={props.webViewLink}>{props.name}</a>;
+	return (
+		<Fragment>
+			<Icon className={styles.file} icon="file" />
+			<a target="_blank" href={props.webViewLink}>{props.name}</a>
+		</Fragment>
+	);
 };
 
-const Image = ({ name, thumbnailLink }) => (
-	<img alt={name} src={thumbnailLink} />
+const Image = ({ name, thumbnailLink, webViewLink }) => (
+	<figure>
+		<img alt={name} src={thumbnailLink} />
+		<figcaption><a target="_blank" href={webViewLink}>{name}</a></figcaption>
+	</figure>
 );
 
 export default Approvals;

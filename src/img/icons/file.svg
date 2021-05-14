@@ -1,0 +1,12 @@
+<svg viewBox="0 0 48 48">
+	<rect x="5" y="1" width="38" height="46" rx="2" ry="2" fill="#e6e6e6">
+	</rect>
+	<rect x="11" y="7" width="26" height="13" rx="1" ry="1" fill="#43a6dd">
+	</rect>
+	<path d="M36,27H12a1,1,0,0,1,0-2H36a1,1,0,0,1,0,2Z" fill="#b3b3b3">
+	</path>
+	<path d="M36,34H12a1,1,0,0,1,0-2H36a1,1,0,0,1,0,2Z" fill="#b3b3b3">
+	</path>
+	<path d="M23,41H12a1,1,0,0,1,0-2H23a1,1,0,0,1,0,2Z" fill="#b3b3b3">
+	</path>
+</svg>

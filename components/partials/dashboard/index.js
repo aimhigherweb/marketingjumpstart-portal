@@ -1,14 +1,14 @@
 import { Fragment, useContext } from 'react';
 
 import GoogleAds from '../../parts/dashboard/googleAds';
-import Drive from '../../parts/dashboard/drive/index.js';
+import Approvals from '../../parts/dashboard/drive/approval';
 
 import { CMSDataContext } from '../../parts/fetchData';
 
 import styles from './dashboard.module.scss';
 
 const Dashboard = () => {
-	const { brands } = useContext(CMSDataContext);
+	const { brands, socialMedias } = useContext(CMSDataContext);
 
 	return (
 		<div className={styles.dashboard}>
@@ -27,9 +27,12 @@ const Dashboard = () => {
 			<section className={styles.section}>
 				<GoogleAds />
 			</section>
-			<section className={styles.section}>
-				<Drive />
-			</section>
+			{socialMedias.map((item) => (
+				<section className={styles.section}>
+					<h2>{item.title}</h2>
+					<Approvals key={JSON.stringify(item)} {...item} />
+				</section>
+			))}
 		</div>
 	);
 };

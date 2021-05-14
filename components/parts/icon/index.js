@@ -20,6 +20,8 @@ import Twitch from "../../../src/img/icons/twitch.svg";
 import Twitter from "../../../src/img/icons/twitter.svg";
 import Chevron from '../../../src/img/icons/chevron_down.svg';
 import Dashboard from '../../../src/img/icons/dashboard.svg';
+import File from '../../../src/img/icons/file.svg';
+import External from '../../../src/img/icons/external.svg';
 import styles from './icon.module.scss';
 
 const Icon = ({ icon, className }) => {
@@ -90,7 +92,13 @@ const Icon = ({ icon, className }) => {
 			Img = (props) => (<Chevron {...props} />);
 			break;
 		case `dashboard`:
-			Img = (props) => <Dashboard {...props} />;
+			Img = (props) => (<Dashboard {...props} />);
+			break;
+		case `file`:
+			Img = (props) => (<File {...props} />);
+			break;
+		case `external`:
+			Img = (props) => (<External {...props} />);
 			break;
 	}
 

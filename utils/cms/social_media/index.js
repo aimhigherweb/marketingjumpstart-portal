@@ -9,6 +9,7 @@ export const SOCIAL_FIELDS = gql`
 		folder
 		approved
 		id
+		title
 	}
 `;
 
