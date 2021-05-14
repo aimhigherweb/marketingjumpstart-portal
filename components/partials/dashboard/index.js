@@ -1,7 +1,7 @@
 import { Fragment, useContext } from 'react';
 
 import GoogleAds from '../../parts/dashboard/googleAds';
-import Drive from '../../parts/dashboard/drive';
+import Drive from '../../parts/dashboard/drive/index.js';
 
 import { CMSDataContext } from '../../parts/fetchData';
 

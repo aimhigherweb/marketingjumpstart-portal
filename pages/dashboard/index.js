@@ -8,12 +8,12 @@ import Dashboard from '../../components/partials/dashboard';
 import GraphQLFetch from '../../components/parts/fetchData';
 
 import { UserContext } from '../_app';
-import { FILTER_BRANDS } from '../../utils/cms/brand';
+import CLIENT_DATA from '../../utils/cms/client';
 
 const UserDashboard = () => {
 	const { roles } = useContext(UserContext);
 	const query = {
-		QUERY: FILTER_BRANDS,
+		QUERY: CLIENT_DATA,
 		options: {
 			variables: {
 				clients: roles

@@ -1,40 +1,31 @@
 import { gql } from '@apollo/client';
 
-export const GET_CLIENTS = gql`
-	query {
-		clients {
-			name
-			slug
+import { SOCIAL_FIELDS } from '../social_media';
+import { BRAND_FIELDS } from '../brand';
+
+const CLIENT_DATA = gql`
+	${SOCIAL_FIELDS}
+	${BRAND_FIELDS}
+	query ClientData($clients: [String]) {
+		socialMedias(
+			sort: "due:desc"
+			where: {
+			approved: false
+				brand: {
+					brand_id_in: $clients
+				}
+			}
+		) {
+			...SocialMediaFields
+		}
+		brands (
+			where: {
+				brand_id_in: $clients
+			}
+		) {
+			...BrandFields
 		}
 	}
 `;
 
-export const FILTER_CLIENTS = gql`
-	query FilterClients($clients: [String]) {
-		clients(
-			where: {
-				slug_in: $clients
-			}
-		) {
-			name
-			slug
-			websites {
-				domain
-				projects {
-					title
-					slug
-				}
-				netlify_site
-				colours {
-					hex
-				}
-			}
-			portal_permissions {
-				sections {
-					slug
-					title
-				}
-			}
-		}
-	}
-`;
+export default CLIENT_DATA;
