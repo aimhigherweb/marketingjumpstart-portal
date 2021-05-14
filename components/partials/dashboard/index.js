@@ -31,12 +31,12 @@ const Dashboard = () => {
 			<section className={styles.section}>
 				<Analytics />
 			</section>
-			{socialMedias.map((item) => (
+			{/* {socialMedias.map((item) => (
 				<section className={styles.section}>
 					<h2>{item.title}</h2>
 					<Approvals key={JSON.stringify(item)} {...item} />
 				</section>
-			))}
+			))} */}
 		</div>
 	);
 };
