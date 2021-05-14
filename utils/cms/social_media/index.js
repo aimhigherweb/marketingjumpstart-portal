@@ -10,6 +10,10 @@ export const SOCIAL_FIELDS = gql`
 		approved
 		id
 		title
+		due
+		start
+		approved_by
+		approved_date
 	}
 `;
 
@@ -43,6 +47,8 @@ export const APPROVE_SOCIALS = gql`
 	${SOCIAL_FIELDS}
 	mutation ApproveMedia(
 		$id: ID! 
+		$approver: String!
+		$date: Date!
 	) {
 		updateSocialMedia(
 			input: {
@@ -51,6 +57,8 @@ export const APPROVE_SOCIALS = gql`
 				}
 				data: {
 					approved: true
+					approved_by: $approver
+					approved_date: $date
 				}
 			}
 		) {

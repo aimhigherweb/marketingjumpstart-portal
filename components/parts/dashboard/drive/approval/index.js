@@ -1,8 +1,11 @@
 import { useQuery } from 'react-query';
 import { useMutation } from '@apollo/client';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
+import { format } from 'date-fns';
 import fetchFiles from '../../../../../utils/drive/fetch';
 import { APPROVE_SOCIALS } from '../../../../../utils/cms/social_media';
+
+import { UserContext } from '../../../../../pages/_app';
 
 import Icon from '../../../icon';
 
@@ -16,10 +19,13 @@ const Approvals = ({ folder, id }) => {
 			per_page: 5
 		}
 	], fetchFiles);
+	const { email } = useContext(UserContext);
 	const [approveSocials] = useMutation(APPROVE_SOCIALS);
 	const details = {
 		variables: {
-			id
+			id,
+			date: format(new Date(), `yyyy-MM-dd`),
+			approver: email
 		}
 	};
 

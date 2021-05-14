@@ -2,6 +2,7 @@ import { Fragment, useContext } from 'react';
 
 import GoogleAds from '../../parts/dashboard/googleAds';
 import Approvals from '../../parts/dashboard/drive/approval';
+import Analytics from '../../parts/dashboard/analytics';
 
 import { CMSDataContext } from '../../parts/fetchData';
 
@@ -18,7 +19,7 @@ const Dashboard = () => {
 				<ul className={styles.clients}>
 					{brands.map((brand) => (
 						<li key={brand.brand_id}>
-							<img className={styles.logo} />
+							<img className={styles.logo} src={brand.logo.url} />
 							{brand.name}
 						</li>
 					))}
@@ -26,6 +27,9 @@ const Dashboard = () => {
 			</section>
 			<section className={styles.section}>
 				<GoogleAds />
+			</section>
+			<section className={styles.section}>
+				<Analytics />
 			</section>
 			{socialMedias.map((item) => (
 				<section className={styles.section}>

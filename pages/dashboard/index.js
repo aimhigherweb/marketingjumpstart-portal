@@ -23,7 +23,7 @@ const UserDashboard = () => {
 
 	return (
 		<Layout>
-			{(true)
+			{(roles && roles.length)
 				? <RestrictedPage>
 					<GraphQLFetch {...query}>
 						<Dashboard />

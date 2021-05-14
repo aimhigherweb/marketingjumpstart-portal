@@ -4,6 +4,11 @@ export const BRAND_FIELDS = gql`
 	fragment BrandFields on Brand {
 		name
 		brand_id
+		logo {
+			url
+		}
+		google_analytics
+		analytics_v4
 	}
 `;
 
