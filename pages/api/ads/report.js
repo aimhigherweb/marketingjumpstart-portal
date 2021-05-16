@@ -1,7 +1,7 @@
 const { JWT } = require(`google-auth-library`);
 const fetch = require(`node-fetch`);
 
-const creds = JSON.parse(process.env.NEXT_GOOGLE_CREDS);
+const creds = JSON.parse(process.env.NEXT_PUBLIC_GOOGLE_CREDS);
 
 export default async (req, response) => {
 	const { customerId } = req.query;
@@ -9,7 +9,7 @@ export default async (req, response) => {
 		email: creds.client_email,
 		key: creds.private_key,
 		scopes: `https://www.googleapis.com/auth/adwords`,
-		subject: process.env.NEXT_GOOGLE_AD_EMAIL,
+		subject: process.env.NEXT_PUBLIC_GOOGLE_AD_EMAIL,
 		aud: `https://oauth2.googleapis.com/token`
 	});
 
@@ -23,8 +23,8 @@ export default async (req, response) => {
 		{
 			method: `GET`,
 			headers: {
-				"developer-token": process.env.NEXT_GOOGLE_ADS_API_DEV_TOKEN,
-				"login-customer-id": process.env.NEXT_GOOGLE_AD_MANAGER_ID,
+				"developer-token": process.env.NEXT_PUBLIC_GOOGLE_ADS_API_DEV_TOKEN,
+				"login-customer-id": process.env.NEXT_PUBLIC_GOOGLE_AD_MANAGER_ID,
 				"Content-Type": `application/json`,
 				Authorization: `Bearer ${auth.token}`
 			},

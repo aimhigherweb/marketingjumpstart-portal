@@ -1,10 +1,28 @@
 const { google } = require(`googleapis`);
 
 export default async (req, res) => {
-	const { id, start = `31daysAgo`, end = `today` } = req.query;
+	const { id, reports } = req.body;
+	let { dateRanges } = req.body;
+
+	if (!dateRanges) {
+		dateRanges = [
+			{
+				start: `31daysAgo`,
+				end: `today`
+			}
+		];
+	}
+
+	const reportRequests = reports.map((report) => (
+		{
+			viewId: id,
+			dateRanges,
+			...report
+		}
+	));
 
 	const auth = new google.auth.GoogleAuth({
-		credentials: JSON.parse(process.env.NEXT_GOOGLE_CREDS),
+		credentials: JSON.parse(process.env.NEXT_PUBLIC_GOOGLE_CREDS),
 		scopes: [
 			`https://www.googleapis.com/auth/analytics.readonly`
 		]
@@ -14,27 +32,12 @@ export default async (req, res) => {
 		auth
 	});
 
-	const reports = await analytics.reports.batchGet({
+	const reportData = await analytics.reports.batchGet({
 		requestBody: {
-			reportRequests: [
-				{
-					viewId: id,
-					dateRanges: [
-						{
-							startDate: start,
-							endDate: end,
-						},
-					],
-					dimensions: [
-						{
-							name: `ga:date`,
-						},
-					],
-				}
-			]
+			reportRequests
 
 		}
 	});
 
-	res.status(200).json(reports?.data?.reports);
+	res.status(200).json(reportData?.data?.reports);
 };

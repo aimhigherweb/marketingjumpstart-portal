@@ -1,11 +1,16 @@
 const fetchData = ({ queryKey }) => {
-	const [key, { id, start = `31daysAgo`, end = `today` }] = queryKey;
+	const [key, { id, dateRanges, reports }] = queryKey;
 
-	return fetch(`/api/analytics/report?id=${id}&start=${start}&end=${end}`, {
+	return fetch(`/api/analytics/report`, {
 		method: `POST`,
 		headers: {
 			'Content-Type': `application/json`
-		}
+		},
+		body: JSON.stringify({
+			id,
+			dateRanges,
+			reports
+		})
 	}).then((res) => res.json()).catch((err) => console.log(err));
 };
 

@@ -2,8 +2,6 @@ import { Fragment, useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { parse, format } from 'date-fns';
 
-import LineChart from '../../charts/line';
-
 import fetchData from '../../../../utils/analytics/report';
 
 import { CMSDataContext } from '../../fetchData';
@@ -14,42 +12,76 @@ const Analytics = () => {
 		`analytics`,
 		{
 			id: brands[0].google_analytics,
-			start: `31daysAgo`,
-			end: `today`
+			dateRanges: [
+				{
+					startDate: `31daysAgo`,
+					endDate: `today`,
+				},
+				{
+					startDate: `2021-03-14`,
+					endDate: `2021-04-13`,
+				},
+			],
+			reports: [
+				{
+					dimensions: [
+						{
+							name: `ga:date`,
+						},
+					],
+				},
+				{
+					metrics: [
+						{
+							expression: `ga:users`,
+						},
+					],
+				},
+				{
+					metrics: [
+						{
+							expression: `ga:sessions`,
+						},
+					],
+				},
+				{
+					metrics: [
+						{
+							expression: `ga:pageviews`,
+						},
+					],
+				},
+				{
+					metrics: [
+						{
+							expression: `ga:bounceRate`,
+						},
+					],
+				},
+			]
 		}
 	], fetchData);
-	const displayResults = (res) => {
-		const queryResult = res[0].data.rows;
-		const id = `set-1`;
-		const result = queryResult.map((row) => {
-			const date = parse(row.dimensions[0], `yyyyMMdd`, new Date());
-			const dateString = format(date, `dd-MMM-yyyy`);
 
-			return {
-				x: dateString,
-				y: parseInt(row.metrics[0].values[0]),
-			};
-		});
+	// console.log({ isLoading, data, error });
 
-		return ({
-			id,
-			name: id,
-			xUnit: `Date`,
-			yUnit: `users`,
-			points: result
-		});
-	};
+	if (isLoading) return <p>Loading...</p>;
+
+	if (error) return <p>Something went wrong</p>;
 
 	return (
 		<Fragment>
 			<h2>Analytics</h2>
-			{data && (
-				<LineChart {...{
-					data: [
-						displayResults(data)
-					],
-				}} />
-			)}
+			<ul>
+				{data.map((item) => {
+					if (item?.data?.totals) {
+						return (
+							<li>
+								<p>{item?.data?.totals[0].values[0]}</p>
+							</li>
+						);
+					}
+				})}
+			</ul>
 		</Fragment>
 	);
 };
