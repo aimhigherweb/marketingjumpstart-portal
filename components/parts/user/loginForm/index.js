@@ -1,8 +1,11 @@
+import Link from 'next/link';
 import {
 	Form, Input, Label, Button, Checkbox, Legend, Password
-} from '../../../../components/parts/forms';
+} from "../../forms";
 
 import { login } from '../../../../utils/auth/netlifyIdentity';
+
+import styles from './loginForm.module.scss';
 
 const Login = ({ loginSuccess, ...attr }) => {
 	const loginSubmit = (e) => {
@@ -32,6 +35,8 @@ const Login = ({ loginSuccess, ...attr }) => {
 			</Password>
 
 			<Checkbox id="remember" name="remember">Remember Me</Checkbox>
+
+			<p className={styles.forgot}><Link href="/password-reset"><a>Forgot your password?</a></Link></p>
 
 			<Button type="submit">Submit</Button>
 		</Form>

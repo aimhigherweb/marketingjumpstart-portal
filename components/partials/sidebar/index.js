@@ -17,7 +17,7 @@ const Sidebar = ({ className }) => {
 				<span className="sr-only">Marketing Jumpstart</span>
 			</a>
 			{authorised
-				&& <Nav />
+				&& <Nav admin={roles.includes(`admin`)} />
 			}
 		</aside>
 	);

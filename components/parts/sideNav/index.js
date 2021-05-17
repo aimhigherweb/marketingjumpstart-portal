@@ -4,7 +4,7 @@ import Icon from "../icon";
 
 import styles from './sideNav.module.scss';
 
-const Nav = ({ items = [] }) => (
+const Nav = ({ items = [], admin }) => (
 	<nav>
 		<ul>
 			<li>
@@ -15,6 +15,16 @@ const Nav = ({ items = [] }) => (
 					</a>
 				</Link>
 			</li>
+			{admin && (
+				<li>
+					<Link href="/clients">
+						<a className={styles.link}>
+							<Icon icon="folder" />
+							All Clients
+						</a>
+					</Link>
+				</li>
+			)}
 			{items.map((item) => (
 				<li key={item.url}>
 					<Link href={item.url}><a>{item.label}</a></Link>

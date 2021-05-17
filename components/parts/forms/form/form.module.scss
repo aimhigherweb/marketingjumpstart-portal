@@ -1,7 +1,9 @@
 .form {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
+	align-content: center;
+	align-self: center;
+	max-width: 800px;
 	padding: 20px;
 	background: #f5f5f5;
 	text-align: left;

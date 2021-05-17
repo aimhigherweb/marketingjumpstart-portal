@@ -22,6 +22,8 @@ import Chevron from '../../../src/img/icons/chevron_down.svg';
 import Dashboard from '../../../src/img/icons/dashboard.svg';
 import File from '../../../src/img/icons/file.svg';
 import External from '../../../src/img/icons/external.svg';
+import Folder from '../../../src/img/icons/folders.svg';
+
 import styles from './icon.module.scss';
 
 const Icon = ({ icon, className }) => {
@@ -99,6 +101,10 @@ const Icon = ({ icon, className }) => {
 			break;
 		case `external`:
 			Img = (props) => (<External {...props} />);
+			break;
+		case `folder`:
+		case `folders`:
+			Img = (props) => (<Folder {...props} />);
 			break;
 	}
 
