@@ -1,7 +1,7 @@
 const files = ({ queryKey }) => {
 	const [key, { folder }] = queryKey;
 
-	return fetch(`/api/drive/list?folder=${folder}`, {
+	return fetch(`/.netlify/functions/next_api_drive_list?folder=${folder}`, {
 		method: `POST`,
 		headers: {
 			'Content-Type': `application/json`
