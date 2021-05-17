@@ -25,19 +25,38 @@ const Dashboard = () => {
 					))}
 				</ul>
 			</section>
-			<section className={styles.section}>
-				<h2>Google Ads</h2>
-				{/* <GoogleAds /> */}
-			</section>
-			<section className={styles.section}>
-				<Analytics />
-			</section>
-			{/* {socialMedias.map((item) => (
+			{brands.map((brand) => {
+				if (brand.ad_id) {
+					return (
+						<section className={styles.section}>
+							<h2>Google Ads</h2>
+							<p>Coming Soon!</p>
+							{/* <GoogleAds /> */}
+						</section>
+					);
+				}
+			})}
+			{brands.map((brand) => {
+				if (brand.google_analytics) {
+					return (
+						<section className={styles.section}>
+							<h2>Analytics</h2>
+							{/* <Analytics /> */}
+						</section>
+					);
+				}
+			})}
+			{socialMedias.map((item) => (
 				<section className={styles.section}>
 					<h2>{item.title}</h2>
 					<Approvals key={JSON.stringify(item)} {...item} />
 				</section>
-			))} */}
+			))}
+			{(!socialMedias || !socialMedias.length) && (
+				<section className={styles.section}>
+					<p>Looks like you don't have anything to approve.</p>
+				</section>
+			)}
 		</div>
 	);
 };

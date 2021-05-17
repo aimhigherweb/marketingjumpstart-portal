@@ -34,3 +34,12 @@ export const FILTER_BRANDS = gql`
 		}
 	}
 `;
+
+export const BRANDS = gql`
+	${BRAND_FIELDS}
+	query {
+		brands {
+			...BrandFields
+		}
+	}
+`;

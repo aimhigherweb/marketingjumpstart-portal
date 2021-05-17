@@ -7,24 +7,27 @@ import RestrictedPage from '../../components/parts/restricted_page';
 import GraphQLFetch from '../../components/parts/fetchData';
 
 import { UserContext } from '../_app';
-import CLIENT_DATA from '../../utils/cms/client';
+import { BRANDS } from '../../utils/cms/brand';
+
+import ClientList from '../../components/parts/clientList';
 
 const ClientsOverview = () => {
 	const { roles } = useContext(UserContext);
 	const query = {
-		QUERY: CLIENT_DATA,
+		QUERY: BRANDS,
 		options: {
 			variables: {
-				clients: roles
 			}
 		}
 	};
-
 	return (
 		<Layout>
 			<RestrictedPage permissions={[`admin`]}>
 				<GraphQLFetch {...query}>
-					<p>Clients List</p>
+					<div>
+						<h1>Clients</h1>
+						<ClientList />
+					</div>
 				</GraphQLFetch>
 			</RestrictedPage>
 		</Layout>
