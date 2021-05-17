@@ -14,7 +14,7 @@ const Login = () => {
 	const router = useRouter();
 	const { name, loggedIn, email } = useContext(UserContext);
 	const logoutSuccess = () => {
-		router.reload();
+		router.push(`/login`);
 	};
 	const [menuOpen, toggleMenu] = useState(false);
 
@@ -54,7 +54,7 @@ const Login = () => {
 								className={styles.button}
 								onClick={() => logout(logoutSuccess)}
 							>
-						Log out
+								Log out
 							</Button>
 						</li>
 					</ul>
