@@ -17,32 +17,34 @@ const GoogleAds = () => {
 		}
 	], fetchData);
 
+	console.log({ isLoading, data, error });
+
 	if (isLoading) return <p>Loading...</p>;
 
 	if (error) return <p>Something went wrong</p>;
 
-	const adData = []
+	// const adData = []
 
-	data?.data[1].forEach((stat, i) => {
-		if (typeof stat === `number`) {
-			adData.push({
-				name: data.data[0][i],
-				value: stat
-			})
-		}
-	});
+	// data?.data[1].forEach((stat, i) => {
+	// 	if (typeof stat === `number`) {
+	// 		adData.push({
+	// 			name: data.data[0][i],
+	// 			value: stat
+	// 		})
+	// 	}
+	// });
 
 	return (
 		<Fragment>
 			<h2>Google Ads</h2>
-			<dl className={styles.stats} style={{'--stats': adData.length}}>
+			{/* <dl className={styles.stats} style={{'--stats': adData.length}}>
 				{adData.map((stat) => (
 					<Fragment>
 						<dt>{stat.name}</dt>
 						<dd>{stat.value}</dd>
 					</Fragment>
 				))}
-			</dl>
+			</dl> */}
 		</Fragment>
 	);
 };

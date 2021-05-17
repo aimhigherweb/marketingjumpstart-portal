@@ -39,7 +39,6 @@ export const requestReset = (email) => {
 };
 
 export const recoverUser = (token) => {
-	console.log(token);
 	auth
 		.recover(token, false)
 		.then((res) => {
@@ -55,5 +54,14 @@ export const updateUser = (details) => {
 	user
 		.update(details)
 		.then((user) => console.log(`Updated user`))
+		.catch((err) => console.log(err));
+};
+
+export const confirmUser = (token) => {
+	auth
+		.confirm(token, true)
+		.then(() => {
+			console.log(`User confirmed`);
+		})
 		.catch((err) => console.log(err));
 };

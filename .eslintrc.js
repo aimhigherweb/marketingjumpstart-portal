@@ -28,6 +28,7 @@ module.exports = {
 		'no-param-reassign': 0,
 		'react/jsx-uses-react': `error`,
 		'react/jsx-uses-vars': `error`,
-		'class-methods-use-this': 0
+		'class-methods-use-this': 0,
+		radix: [`error`, `as-needed`]
 	}
 };

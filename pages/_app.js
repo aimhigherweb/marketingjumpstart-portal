@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import { currentUser, recoverUser } from '../utils/auth/netlifyIdentity';
 import recoverToken from '../utils/auth/recoverUser';
+import confirmUser from '../utils/auth/signupUser';
 import cache from '../utils/cms/cache';
 
 import '../styles/global.scss';
@@ -48,8 +49,14 @@ const App = ({ Component, pageProps }) => {
 
 			const recover = recoverToken();
 
+			const newUser = confirmUser();
+
 			if (recover) {
 				console.log(`User has been recovered, redirecting to update page`);
+			}
+
+			if (newUser) {
+				console.log(`User has been confirmed, redirecting to dashboard`);
 			}
 		}
 	}, [user]);
