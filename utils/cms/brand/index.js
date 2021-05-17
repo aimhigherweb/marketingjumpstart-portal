@@ -9,6 +9,7 @@ export const BRAND_FIELDS = gql`
 		}
 		google_analytics
 		analytics_v4
+		ad_id
 	}
 `;
 

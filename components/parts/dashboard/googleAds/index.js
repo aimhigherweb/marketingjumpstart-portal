@@ -6,6 +6,8 @@ import fetchData from '../../../../utils/ads/index';
 
 import { CMSDataContext } from '../../fetchData';
 
+import styles from './googleAds.module.scss';
+
 const GoogleAds = () => {
 	const { brands } = useContext(CMSDataContext);
 	const { isLoading, data, error } = useQuery([
@@ -19,10 +21,29 @@ const GoogleAds = () => {
 
 	if (error) return <p>Something went wrong</p>;
 
+	const adData = []
+
+	data?.data[1].forEach((stat, i) => {
+		if (typeof stat === `number`) {
+			adData.push({
+				name: data.data[0][i],
+				value: stat
+			})
+		}
+	});
+
 	return (
-		<div>
+		<Fragment>
 			<h2>Google Ads</h2>
-		</div>
+			<dl className={styles.stats} style={{'--stats': adData.length}}>
+				{adData.map((stat) => (
+					<Fragment>
+						<dt>{stat.name}</dt>
+						<dd>{stat.value}</dd>
+					</Fragment>
+				))}
+			</dl>
+		</Fragment>
 	);
 };
 

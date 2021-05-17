@@ -1,0 +1,35 @@
+.stats {
+	display: grid;
+	grid-template-columns: repeat(var(--stats), 1fr);
+	grid-template-rows: auto auto;
+	text-align: center;
+
+	dt {
+		order: 2;
+		margin: 10px 0 0;
+	}
+
+	dd {
+		margin: 0;
+		font-size: 1.8em;
+		font-weight: 500;
+	}
+
+	small {
+		display: block;
+		font-size: 0.4em;
+		font-weight: 700;
+
+		&.up {
+			color: var.$green;
+		}
+
+		&.down {
+			color: var.$red;
+		}
+	}
+
+	.type {
+		font-weight: 400;
+	}
+}

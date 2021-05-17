@@ -25,10 +25,9 @@ const fetchData = ({ queryKey }) => {
 	return fetch(url, {
 		method: `GET`,
 		headers: {
-			'Content-Type': `application/json`,
 			Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPERMETRICS_API}`
 		},
-	});
+	}).then((res) => res.json());
 };
 
 export default fetchData;

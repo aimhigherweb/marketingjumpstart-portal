@@ -6,6 +6,8 @@ import fetchData from '../../../../utils/analytics/report';
 
 import { CMSDataContext } from '../../fetchData';
 
+import styles from './analytics.module.scss';
+
 const Analytics = () => {
 	const { brands } = useContext(CMSDataContext);
 	const { isLoading, data, error } = useQuery([
@@ -62,26 +64,42 @@ const Analytics = () => {
 		}
 	], fetchData);
 
-	// console.log({ isLoading, data, error });
-
 	if (isLoading) return <p>Loading...</p>;
 
 	if (error) return <p>Something went wrong</p>;
 
+	const headers = {
+		'ga:sessions': `Sessions`,
+		'ga:visits': `Visits`,
+		'ga:users': `Users`,
+		'ga:pageviews': `PageViews`,
+		'ga:bounceRate': `BounceRate`
+	};
+
+	const stats = data.filter((item) => item?.data?.totals);
+
 	return (
 		<Fragment>
 			<h2>Analytics</h2>
-			<ul>
-				{data.map((item) => {
-					if (item?.data?.totals) {
-						return (
-							<li>
-								<p>{item?.data?.totals[0].values[0]}</p>
-							</li>
-						);
-					}
+			<dl className={styles.stats} style={{ '--stats': stats.length }}>
+				{stats.map((item) => {
+					const value = item?.data?.totals[0].values[0];
+					const label = headers[item.columnHeader.metricHeader.metricHeaderEntries[0].name];
+					const compare = item?.data?.totals[1].values[0];
+					const { type } = item.columnHeader.metricHeader.metricHeaderEntries[0];
+					const change = ((value / compare) - 1) * 100;
+					return (
+						<Fragment key={label}>
+							<dt>{label}</dt>
+							<dd>
+								{parseInt(value)}
+								<span className={styles.type}>{type === `PERCENT` && `%`}</span>
+								<small className={styles[change > 1 ? `up` : `down`]}>{change.toFixed(2)}</small>
+							</dd>
+						</Fragment>
+					);
 				})}
-			</ul>
+			</dl>
 		</Fragment>
 	);
 };

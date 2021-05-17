@@ -23,7 +23,14 @@ const RestrictedPage = ({
 		}
 	}, [roles, loggedIn, authorised]);
 
-	if (!authorised) return <h1>403</h1>;
+	if (!authorised) {
+		return (
+			<Fragment>
+				<h1>403</h1>
+				<p>Looks like you don't have permission to view this page</p>
+			</Fragment>
+		);
+	}
 
 	return <Fragment>{children}</Fragment>;
 };

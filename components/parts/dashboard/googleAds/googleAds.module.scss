@@ -1,0 +1,17 @@
+.stats {
+	display: grid;
+	grid-template-columns: repeat(var(--stats), 1fr);
+	grid-template-rows: auto auto;
+	text-align: center;
+
+	dt {
+		order: 2;
+		margin: 0;
+	}
+
+	dd {
+		margin: 0;
+		font-size: 3em;
+		font-weight: 700;
+	}
+}

@@ -26,7 +26,8 @@ const Dashboard = () => {
 				</ul>
 			</section>
 			<section className={styles.section}>
-				<GoogleAds />
+				<h2>Google Ads</h2>
+				{/* <GoogleAds /> */}
 			</section>
 			<section className={styles.section}>
 				<Analytics />
