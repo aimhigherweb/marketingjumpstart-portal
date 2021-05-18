@@ -11,8 +11,6 @@ import Layout from '../../components/layout';
 
 import { requestReset } from '../../utils/auth/netlifyIdentity';
 
-// import styles from './register.module.scss';
-
 const PasswordReset = () => {
 	const [submitted, setSubmit] = useState(false);
 	const submitRequest = (e) => {
