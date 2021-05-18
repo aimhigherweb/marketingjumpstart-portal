@@ -57,9 +57,13 @@ export const updateUser = (details) => {
 		.catch((err) => console.log(err));
 };
 
-export const confirmUser = (token) => {
+export const confirmUser = (details) => {
 	auth
-		.confirm(token, true)
+		.acceptInvite(
+			details.token,
+			details.password,
+			false
+		)
 		.then(() => {
 			console.log(`User confirmed`);
 		})

@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 
 import { currentUser, recoverUser } from '../utils/auth/netlifyIdentity';
 import recoverToken from '../utils/auth/recoverUser';
-import confirmUser from '../utils/auth/signupUser';
 import cache from '../utils/cms/cache';
 
 import '../styles/global.scss';
@@ -45,18 +44,13 @@ const App = ({ Component, pageProps }) => {
 
 	useEffect(() => {
 		if (typeof window !== `undefined`) {
+			// eslint-disable-next-line no-undefi
 			window.localStorage.setItem(`gotrue.user`, JSON.stringify(user));
 
 			const recover = recoverToken();
 
-			const newUser = confirmUser();
-
 			if (recover) {
 				console.log(`User has been recovered, redirecting to update page`);
-			}
-
-			if (newUser) {
-				console.log(`User has been confirmed, redirecting to dashboard`);
 			}
 		}
 	}, [user]);
