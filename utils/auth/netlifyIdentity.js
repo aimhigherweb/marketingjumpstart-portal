@@ -51,6 +51,8 @@ export const recoverUser = (token) => {
 export const updateUser = (details) => {
 	const user = auth.currentUser();
 
+	console.log(details);
+
 	user
 		.update(details)
 		.then((user) => console.log(`Updated user`, user))

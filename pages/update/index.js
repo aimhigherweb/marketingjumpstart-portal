@@ -26,7 +26,9 @@ const PasswordReset = ({ attr }) => {
 		const { elements } = form;
 		const details = {
 			email: elements.email.value,
-			name: elements.name.value,
+			data: {
+				full_name: elements.name.value,
+			}
 		};
 
 		if (elements.password.value && elements.password.value !== ``) {
@@ -43,37 +45,42 @@ const PasswordReset = ({ attr }) => {
 			<div>
 				{loggedIn
 					&& <Form onSubmit={(e) => submitRequest(e)} {...attr}>
-						<Label htmlFor="name">Name</Label>
-						<Input
-							type="text"
-							id="name"
-							defaultValue={name}
-							name="name"
-						/>
-						<Label htmlFor="email">Email Address</Label>
-						<Input
-							type="email"
-							id="email"
-							name="email"
-							defaultValue={email}
-							placeholder="hello@domain.com"
-							inputMode="email"
-						/>
-						<Password
-							autoComplete="on"
-							validate={true}
-							pathname={router.pathname}
-						>
-							Change Password
-							<Hint>Must contain
-								<ul className="requirements">
-									<li>At least 8 characters</li>
-									<li>At least 1 uppercase letter</li>
-									<li>At least 1 number</li>
-								</ul>
-							</Hint>
-						</Password>
-						<Button type="submit">Update Details</Button>
+						{!submitted
+							? <Fragment>
+								<Label htmlFor="name">Name</Label>
+								<Input
+									type="text"
+									id="name"
+									defaultValue={name}
+									name="name"
+								/>
+								<Label htmlFor="email">Email Address</Label>
+								<Input
+									type="email"
+									id="email"
+									name="email"
+									defaultValue={email}
+									placeholder="hello@domain.com"
+									inputMode="email"
+								/>
+								<Password
+									autoComplete="on"
+									validate={true}
+									pathname={router.pathname}
+								>
+									Change Password
+									<Hint>Must contain
+										<ul className="requirements">
+											<li>At least 8 characters</li>
+											<li>At least 1 uppercase letter</li>
+											<li>At least 1 number</li>
+										</ul>
+									</Hint>
+								</Password>
+								<Button type="submit">Update Details</Button>
+							</Fragment>
+							: <p>Your details have been updated!</p>
+						}
 					</Form>
 				}
 			</div>
