@@ -113,7 +113,6 @@ const Password = ({
 					minLength="8"
 					pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,100})"
 					autoComplete="current-password"
-					required
 					className={passwordValidated && styles.validated}
 					onBlur={(e) => validatePassword(e)}
 					onChange={(e) => checkValidate(e)}

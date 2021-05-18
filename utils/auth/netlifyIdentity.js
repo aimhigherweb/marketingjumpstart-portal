@@ -53,7 +53,7 @@ export const updateUser = (details) => {
 
 	user
 		.update(details)
-		.then((user) => console.log(`Updated user`))
+		.then((user) => console.log(`Updated user`, user))
 		.catch((err) => console.log(err));
 };
 

@@ -30,7 +30,7 @@ const Login = ({ loginSuccess, ...attr }) => {
 				inputMode="email"
 			/>
 
-			<Password>
+			<Password required={true}>
 				Password
 			</Password>
 

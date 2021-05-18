@@ -24,16 +24,19 @@ const PasswordReset = ({ attr }) => {
 
 		const form = e.target;
 		const { elements } = form;
-		const details = { email: elements.email.value, name: elements.name.value, password: elements.password.value };
+		const details = {
+			email: elements.email.value,
+			name: elements.name.value,
+		};
 
-		console.log(details);
+		if (elements.password.value && elements.password.value !== ``) {
+			details.password = elements.password.value;
+		}
 
 		updateUser(details);
 
 		setSubmit(!submitted);
 	};
-
-	console.log(router);
 
 	return (
 		<Layout>
@@ -61,7 +64,7 @@ const PasswordReset = ({ attr }) => {
 							validate={true}
 							pathname={router.pathname}
 						>
-				Change Password
+							Change Password
 							<Hint>Must contain
 								<ul className="requirements">
 									<li>At least 8 characters</li>
