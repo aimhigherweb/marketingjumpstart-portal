@@ -4,7 +4,7 @@
   "author": "AimHigher Web <amy@aimhigherweb.design> (https://aimhigherweb.design)",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prisma:gen && next build",
     "start": "npm run dev",
     "export": "next export",
     "clean": "rm -rf .next",
