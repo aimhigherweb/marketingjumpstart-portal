@@ -11,7 +11,12 @@ module.exports = {
 			@use "styles/_mixins.scss";
 		`,
 	},
-	webpack: (config, options) => {
+	webpack: (config, { isServer }) => {
+		// Prisma Serverless Fix
+		if (isServer) {
+			config.externals.push(`@prisma/client`);
+		}
+
 		// Inline SVGs
 		config.module.rules.push({
 			test: /\.svg$/,
