@@ -80,18 +80,18 @@ const Analytics = () => {
 
 	return (
 		<Fragment>
-			<h2>Analytics</h2>
 			<dl className={styles.stats} style={{ '--stats': stats.length }}>
 				{stats.map((item) => {
 					const value = item?.data?.totals[0].values[0];
-					const label = headers[item.columnHeader.metricHeader.metricHeaderEntries[0].name];
+					const { name } = item.columnHeader.metricHeader.metricHeaderEntries[0];
+					const label = headers[name];
 					const compare = item?.data?.totals[1].values[0];
 					const { type } = item.columnHeader.metricHeader.metricHeaderEntries[0];
 					const change = ((value / compare) - 1) * 100;
 					return (
 						<Fragment key={label}>
 							<dt>{label}</dt>
-							<dd>
+							<dd className={styles[name.replace(`ga:`, ``)]}>
 								{parseInt(value)}
 								<span className={styles.type}>{type === `PERCENT` && `%`}</span>
 								<small className={styles[change > 1 ? `up` : `down`]}>{change.toFixed(2)}</small>

@@ -1,6 +1,9 @@
 const fetchData = ({ queryKey }) => {
 	const [key, { id, dateRanges, reports }] = queryKey;
 
+	// /.netlify/functions/next_api_analytics_report
+	// /api/analytics/report
+
 	return fetch(`/.netlify/functions/next_api_analytics_report`, {
 		method: `POST`,
 		headers: {

@@ -17,11 +17,11 @@ const GoogleAds = () => {
 		}
 	], fetchData);
 
-	console.log({ isLoading, data, error });
-
 	if (isLoading) return <p>Loading...</p>;
 
 	if (error || !data) return <p>Something went wrong</p>;
+
+	console.log(data);
 
 	return (
 		<Fragment>

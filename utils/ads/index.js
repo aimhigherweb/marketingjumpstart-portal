@@ -1,6 +1,9 @@
 const fetchData = ({ queryKey }) => {
 	const [key, { id, dateRanges }] = queryKey;
 
+	// /.netlify/functions/next_api_ads_general
+	// /api/ads/general
+
 	return fetch(`/.netlify/functions/next_api_ads_general`, {
 		method: `POST`,
 		headers: {

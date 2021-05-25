@@ -5,6 +5,8 @@ const generalProgress = (data) => {
 	const numClicks = data.filter((seg) => seg.clicks !== 0).length;
 	let cost = 0;
 
+	if (!data.length) return null;
+
 	data.forEach((seg) => {
 		clicks += seg.clicks;
 		impressions += seg.impressions;
