@@ -12,13 +12,6 @@ module.exports = {
 		`,
 	},
 	webpack: (config, options) => {
-		// Netlify Plugin fix
-		if (config.externals) {
-			config.externals.push(`@netlify/zip-it-and-ship-it`);
-		} else {
-			config.externals = [`@netlify/zip-it-and-ship-it`];
-		}
-
 		// Inline SVGs
 		config.module.rules.push({
 			test: /\.svg$/,
