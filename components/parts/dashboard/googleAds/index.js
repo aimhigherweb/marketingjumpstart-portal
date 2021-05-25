@@ -21,30 +21,26 @@ const GoogleAds = () => {
 
 	if (isLoading) return <p>Loading...</p>;
 
-	if (error) return <p>Something went wrong</p>;
-
-	// const adData = []
-
-	// data?.data[1].forEach((stat, i) => {
-	// 	if (typeof stat === `number`) {
-	// 		adData.push({
-	// 			name: data.data[0][i],
-	// 			value: stat
-	// 		})
-	// 	}
-	// });
+	if (error || !data) return <p>Something went wrong</p>;
 
 	return (
 		<Fragment>
-			<h2>Google Ads</h2>
-			{/* <dl className={styles.stats} style={{'--stats': adData.length}}>
-				{adData.map((stat) => (
-					<Fragment>
-						<dt>{stat.name}</dt>
-						<dd>{stat.value}</dd>
-					</Fragment>
-				))}
-			</dl> */}
+			<dl className={styles.stats} style={{ '--stats': 4 }}>
+				<dt>Clicks</dt>
+				<dd>{data.clicks}</dd>
+				<dt>Avg CPC</dt>
+				<dd>
+					<span className={styles.type}>$</span>
+					{data.avg_cpc.toFixed(2)}
+				</dd>
+				<dt>Impressions</dt>
+				<dd>{data.impressions}</dd>
+				<dt>Avg CPM</dt>
+				<dd>
+					<span className={styles.type}>$</span>
+					{data.avg_cpm.toFixed(2)}
+				</dd>
+			</dl>
 		</Fragment>
 	);
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import GoTrue from 'gotrue-js';
 
 const auth = new GoTrue({
@@ -18,7 +19,7 @@ export const logout = (logoutSuccess) => {
 	auth
 		.currentUser()
 		.logout()
-		.then((res) => { logoutSuccess(); })
+		.then(() => { logoutSuccess(); })
 		.catch((err) => console.log(err));
 };
 
@@ -27,21 +28,21 @@ export const currentUser = () => auth.currentUser();
 export const signup = ({ email, password, name }) => {
 	auth
 		.signup(email.value, password.value, { full_name: name.value })
-		.then((res) => console.log(`Confirmation email sent`))
+		.then(() => console.log(`Confirmation email sent`))
 		.catch((err) => console.log(err));
 };
 
 export const requestReset = (email) => {
 	auth
 		.requestPasswordRecovery(email)
-		.then((res) => console.log(`Recovery email sent`))
-		.catch((err) => console.log(`Error sending recovery email`));
+		.then(() => console.log(`Recovery email sent`))
+		.catch((err) => console.log(`Error sending recovery email`, err));
 };
 
 export const recoverUser = (token) => {
 	auth
 		.recover(token, false)
-		.then((res) => {
+		.then(() => {
 			console.log(`Logged in`);
 			console.log(auth.currentUser());
 		})
@@ -55,7 +56,7 @@ export const updateUser = (details) => {
 
 	user
 		.update(details)
-		.then((user) => console.log(`Updated user`, user))
+		.then((res) => console.log(`Updated user`, res))
 		.catch((err) => console.log(err));
 };
 

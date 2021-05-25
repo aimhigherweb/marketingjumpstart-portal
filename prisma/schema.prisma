@@ -8,832 +8,124 @@ datasource db {
   url      = env("NEXT_PUBLIC_DATABASE_URL")
 }
 
-model Account {
-  id                  Int
-  sequence_id         Int
-  manager_customer_id Int?
-  account_label_id    Int?
-  account_label_name  String?   @db.NVarChar(256)
-  can_manage_clients  Boolean?
-  currency_code       String?   @db.NVarChar(256)
-  date_timezone       String?   @db.NVarChar(256)
-  name                String?   @db.NVarChar(256)
-  test_account        Boolean?
-  fivetran_synced     DateTime? @map("_fivetran_synced") @db.DateTimeOffset
+model AccountPerformance {
+  date                        DateTime  @db.Date
+  customer_id                 Int
+  fivetran_id                 String    @map("_fivetran_id") @db.NVarChar(256)
+  day_of_week                 String?   @db.NVarChar(256)
+  impressions                 Int?
+  account_descriptive_name    String?   @db.NVarChar(256)
+  average_cpc                 Float?
+  customer_descriptive_name   String?   @db.NVarChar(256)
+  hour_of_day                 Int?
+  clicks                      Int?
+  average_cpm                 Float?
+  fivetran_synced             DateTime? @map("_fivetran_synced") @db.DateTimeOffset
+  active_view_measurable_cost Float?
+  cost                        Float?
+  active_view_cpm             Float?
+  average_cost                Float?
+  active_view_impressions     Int?
+  cost_per_conversion         Float?
 
-  @@id([id, sequence_id])
-  @@map("account")
+  @@id([date, customer_id, fivetran_id])
+  @@map("account_performance_report")
 }
 
-model account_hourly_stats {
+model AdPerformance {
+  date                                           DateTime  @db.Date
+  customer_id                                    Int
+  fivetran_id                                    String    @map("_fivetran_id") @db.NVarChar(256)
+  responsive_search_ad_path_1                    String?   @db.NVarChar(256)
+  day_of_week                                    String?   @db.NVarChar(256)
+  display_url                                    String?   @db.NVarChar(256)
+  description                                    String?   @db.NVarChar(256)
+  ad_group_name                                  String?   @db.NVarChar(256)
+  description_2                                  String?   @db.NVarChar(256)
+  description_1                                  String?   @db.NVarChar(256)
+  campaign_id                                    Int?
+  responsive_search_ad_descriptions              String?   @db.NVarChar(1024)
+  responsive_search_ad_headlines                 String?   @db.NVarChar(2048)
+  headline                                       String?   @db.NVarChar(256)
+  customer_descriptive_name                      String?   @db.NVarChar(256)
+  ad_group_id                                    Int?
+  clicks                                         Int?
+  expanded_dynamic_search_creative_description_2 String?   @db.NVarChar(256)
+  expanded_text_ad_description_2                 String?   @db.NVarChar(256)
+  fivetran_synced                                DateTime? @map("_fivetran_synced") @db.DateTimeOffset
+  campaign_name                                  String?   @db.NVarChar(256)
+  average_cpc                                    Float?
+  cost                                           Float?
+  impressions                                    Int?
+
+  @@id([date, customer_id, fivetran_id])
+  @@map("ad_performance")
+}
+
+model AdGroupPerformance {
   date                               DateTime  @db.Date
   customer_id                        Int
   fivetran_id                        String    @map("_fivetran_id") @db.NVarChar(256)
   ctr                                Float?
-  quarter                            String?   @db.NVarChar(256)
-  ad_network_type_1                  String?   @db.NVarChar(256)
-  month_of_year                      String?   @db.NVarChar(256)
-  ad_network_type_2                  String?   @db.NVarChar(256)
-  average_cost                       Float?
-  hour_of_day                        Int?
-  average_cpm                        Float?
-  cost                               Float?
-  active_view_cpm                    Float?
-  month                              String?   @db.NVarChar(256)
-  active_view_impressions            Int?
-  active_view_ctr                    Float?
-  click_type                         String?   @db.NVarChar(256)
-  cost_per_conversion                Float?
-  conversion_value                   Float?
-  active_view_measurable_impressions Int?
-  interaction_types                  String?   @db.NVarChar(256)
   day_of_week                        String?   @db.NVarChar(256)
   impressions                        Int?
-  active_view_measurable_cost        Float?
-  device                             String?   @db.NVarChar(256)
-  active_view_viewability            Float?
-  value_per_conversion               Float?
-  external_customer_id               Int?
-  conversion_rate                    Float?
+  ad_group_status                    String?   @db.NVarChar(256)
+  campaign_status                    String?   @db.NVarChar(256)
+  ad_group_tablet_bid_modifier       Float?
+  campaign_name                      String?   @db.NVarChar(256)
+  average_cost                       Float?
+  ad_group_name                      String?   @db.NVarChar(256)
+  relative_ctr                       Float?
+  cost                               Float?
+  ad_group_desktop_bid_modifier      Float?
+  active_view_ctr                    Float?
   conversions                        Float?
-  year                               Int?
+  campaign_id                        Int?
   average_cpc                        Float?
-  interaction_rate                   Float?
-  interactions                       Int?
-  clicks                             Int?
-  week                               String?   @db.NVarChar(256)
-  active_view_measurability          Float?
-  fivetran_synced                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([date, customer_id, fivetran_id])
-}
-
-model account_stats {
-  date                               DateTime  @db.Date
-  customer_id                        Int
-  fivetran_id                        String    @map("_fivetran_id") @db.NVarChar(256)
-  impressions                        Int?
-  ad_network_type_1                  String?   @db.NVarChar(256)
-  ad_network_type_2                  String?   @db.NVarChar(256)
-  active_view_measurable_cost        Float?
-  device                             String?   @db.NVarChar(256)
-  active_view_viewability            Float?
-  view_through_conversions           Int?
-  cost                               Float?
-  external_customer_id               Int?
-  active_view_impressions            Int?
-  conversions                        Float?
-  slot                               String?   @db.NVarChar(256)
-  conversion_value                   Float?
-  interactions                       Int?
-  active_view_measurable_impressions Int?
-  clicks                             Int?
-  interaction_types                  String?   @db.NVarChar(256)
-  active_view_measurability          Float?
-  fivetran_synced                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([date, customer_id, fivetran_id])
-}
-
-model ad_final_url_history {
-  ad_group_id     Int
-  ad_id           Int
-  sequence_id     Int
-  updated_at      DateTime  @db.DateTimeOffset
-  url             String?   @db.NVarChar(256)
-  fivetran_synced DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, ad_id, sequence_id, updated_at])
-}
-
-model ad_group_criterion_history {
-  ad_group_id                                        Int
-  id                                                 Int
-  updated_at                                         DateTime  @db.DateTimeOffset
-  ad_group_criterion_type                            String?   @db.NVarChar(256)
-  age_range_type                                     String?   @db.NVarChar(256)
-  app_id                                             String?   @db.NVarChar(256)
-  app_payment_model_type                             String?   @db.NVarChar(256)
-  approval_status                                    String?   @db.NVarChar(256)
-  base_adgroup_id                                    Int?
-  base_campaign_id                                   Int?
-  bid_modifier                                       Float?
-  bidding_strategy_scheme_type                       String?   @db.NVarChar(256)
-  bidding_strategy_bid_ceiling                       Int?
-  bidding_strategy_bid_changes_for_raises_only       Boolean?
-  bidding_strategy_bid_floor                         Int?
-  bidding_strategy_bid_modifier                      Float?
-  bidding_strategy_competitor_domain                 String?   @db.NVarChar(256)
-  bidding_strategy_enhanced_cpc_enabled              Boolean?
-  bidding_strategy_id                                Int?
-  bidding_strategy_max_cpc_bid_ceiling               Int?
-  bidding_strategy_max_cpc_bid_floor                 Int?
-  bidding_strategy_name                              String?   @db.NVarChar(256)
-  bidding_strategy_raise_bid_when_budget_constrained Boolean?
-  bidding_strategy_raise_bid_when_low_quality_score  Boolean?
-  bidding_strategy_source                            String?   @db.NVarChar(256)
-  bidding_strategy_spend_target                      Int?
-  bidding_strategy_strategy_goal                     String?   @db.NVarChar(256)
-  bidding_strategy_target_cpa                        Int?
-  bidding_strategy_target_outrank_share              Int?
-  bidding_strategy_target_roas                       Float?
-  bidding_strategy_target_roas_override              Float?
-  bidding_strategy_type                              String?   @db.NVarChar(256)
-  bidding_strategy_viewable_cpm_enabled              Boolean?
-  bidding_strategy_cpa_bid_amount                    Int?
-  bidding_strategy_cpc_bid_amount                    Int?
-  bidding_strategy_cpm_bid_amount                    Int?
-  channel_exclusivity                                String?   @db.NVarChar(256)
-  channel_id                                         String?   @db.NVarChar(256)
-  channel_name                                       String?   @db.NVarChar(256)
-  criterion_use                                      String?   @db.NVarChar(256)
-  custom_affinity_id                                 Int?
-  custom_intent_id                                   Int?
-  first_page_cpc                                     Int?
-  first_position_cpc                                 Int?
-  gender_type                                        String?   @db.NVarChar(256)
-  income_range_type                                  String?   @db.NVarChar(256)
-  keyword_match_type                                 String?   @db.NVarChar(256)
-  keyword_text                                       String?   @db.NVarChar(256)
-  mobile_app_category_display_name                   String?   @db.NVarChar(256)
-  mobile_app_category_id                             Int?
-  mobile_application_display_name                    String?   @db.NVarChar(256)
-  parent_criterion_id                                Int?
-  parent_type                                        String?   @db.NVarChar(256)
-  partition_type                                     String?   @db.NVarChar(256)
-  placement_url                                      String?   @db.NVarChar(256)
-  product_adwords_grouping                           String?   @db.NVarChar(256)
-  product_adwords_label                              String?   @db.NVarChar(256)
-  product_bidding_category_type                      String?   @db.NVarChar(256)
-  product_bidding_category_value                     Int?
-  product_brand_value                                String?   @db.NVarChar(256)
-  product_canonical_condition                        String?   @db.NVarChar(256)
-  product_channel                                    String?   @db.NVarChar(256)
-  product_custom_attribute_type                      String?   @db.NVarChar(256)
-  product_custom_attribute_value                     String?   @db.NVarChar(256)
-  product_legacy_condition                           String?   @db.NVarChar(256)
-  product_offer_id                                   String?   @db.NVarChar(256)
-  product_type                                       String?   @db.NVarChar(256)
-  product_type_full                                  String?   @db.NVarChar(256)
-  product_type_value                                 String?   @db.NVarChar(256)
-  quality_info_score                                 Int?
-  system_serving_status                              String?   @db.NVarChar(256)
-  top_of_page_cpc                                    Int?
-  tracking_url_template                              String?   @db.NVarChar(256)
-  user_interest_id                                   Int?
-  user_interest_name                                 String?   @db.NVarChar(256)
-  user_interest_parent_id                            Int?
-  user_list_eligible_for_display                     Boolean?
-  user_list_eligible_for_search                      Boolean?
-  user_list_id                                       Int?
-  user_list_membership_status                        String?   @db.NVarChar(256)
-  user_list_name                                     String?   @db.NVarChar(256)
-  user_status                                        String?   @db.NVarChar(256)
-  vertical_id                                        Int?
-  vertical_parent_id                                 Int?
-  vertical_path                                      String?   @db.NVarChar(256)
-  video_id                                           String?   @db.NVarChar(256)
-  video_name                                         String?   @db.NVarChar(256)
-  fivetran_synced                                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, id, updated_at])
-}
-
-model ad_group_explorer_auto_optimizer_setting_history {
-  ad_group_id     Int
-  updated_at      DateTime  @db.DateTimeOffset
-  opt_in          Boolean?
-  fivetran_synced DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, updated_at])
-}
-
-model ad_group_history {
-  id                                                 Int
-  updated_at                                         DateTime  @db.DateTimeOffset
-  campaign_id                                        Int?
-  ad_group_rotation_mode                             String?   @db.NVarChar(256)
-  ad_group_type                                      String?   @db.NVarChar(256)
-  base_ad_group_id                                   Int?
-  base_campaign_id                                   Int?
-  bidding_strategy_scheme_type                       String?   @db.NVarChar(256)
-  bidding_strategy_bid_ceiling                       Int?
-  bidding_strategy_bid_changes_for_raises_only       Boolean?
-  bidding_strategy_bid_floor                         Int?
-  bidding_strategy_bid_modifier                      Float?
-  bidding_strategy_competitor_domain                 String?   @db.NVarChar(256)
-  bidding_strategy_enhanced_cpc_enabled              Boolean?
-  bidding_strategy_id                                Int?
-  bidding_strategy_max_cpc_bid_ceiling               Int?
-  bidding_strategy_max_cpc_bid_floor                 Int?
-  bidding_strategy_name                              String?   @db.NVarChar(256)
-  bidding_strategy_raise_bid_when_budget_constrained Boolean?
-  bidding_strategy_raise_bid_when_low_quality_score  Boolean?
-  bidding_strategy_source                            String?   @db.NVarChar(256)
-  bidding_strategy_spend_target                      Int?
-  bidding_strategy_strategy_goal                     String?   @db.NVarChar(256)
-  bidding_strategy_target_cpa                        Int?
-  bidding_strategy_target_outrank_share              Int?
-  bidding_strategy_target_roas                       Float?
-  bidding_strategy_target_roas_override              Float?
-  bidding_strategy_type                              String?   @db.NVarChar(256)
-  bidding_strategy_viewable_cpm_enabled              Boolean?
-  bidding_strategy_cpa_bid_amount                    Int?
-  bidding_strategy_cpc_bid_amount                    Int?
-  bidding_strategy_cpm_bid_amount                    Int?
-  campaign_name                                      String?   @db.NVarChar(256)
-  content_bid_criterion_type_group                   String?   @db.NVarChar(256)
-  final_url_suffix                                   String?   @db.NVarChar(256)
-  name                                               String?   @db.NVarChar(256)
-  status                                             String?   @db.NVarChar(256)
-  tracking_url_template                              String?   @db.NVarChar(256)
-  fivetran_synced                                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([id, updated_at])
-}
-
-model ad_group_hourly_stats {
-  date                                      DateTime  @db.Date
-  customer_id                               Int
-  fivetran_id                               String    @map("_fivetran_id") @db.NVarChar(256)
-  ctr                                       Float?
-  quarter                                   String?   @db.NVarChar(256)
-  ad_network_type_1                         String?   @db.NVarChar(256)
-  month_of_year                             String?   @db.NVarChar(256)
-  ad_network_type_2                         String?   @db.NVarChar(256)
-  base_campaign_id                          Int?
-  average_cost                              Float?
-  hour_of_day                               Int?
-  average_cpm                               Float?
-  cost                                      Float?
-  active_view_cpm                           Float?
-  month                                     String?   @db.NVarChar(256)
-  active_view_impressions                   Int?
-  gmail_secondary_clicks                    Int?
-  active_view_ctr                           Float?
-  click_type                                String?   @db.NVarChar(256)
-  campaign_id                               Int?
-  cost_per_conversion                       Float?
-  conversion_value                          Float?
-  active_view_measurable_impressions        Int?
-  interaction_types                         String?   @db.NVarChar(256)
-  day_of_week                               String?   @db.NVarChar(256)
-  impressions                               Int?
-  gmail_forwards                            Int?
-  active_view_measurable_cost               Float?
-  device                                    String?   @db.NVarChar(256)
-  active_view_viewability                   Float?
-  value_per_conversion                      Float?
-  external_customer_id                      Int?
-  conversion_rate                           Float?
-  conversions                               Float?
-  gmail_saves                               Int?
-  year                                      Int?
-  average_cpc                               Float?
-  interaction_rate                          Float?
-  interactions                              Int?
-  ad_group_id                               Int?
-  clicks                                    Int?
-  week                                      String?   @db.NVarChar(256)
-  base_ad_group_id                          Int?
-  current_model_attributed_conversion_value Float?
-  active_view_measurability                 Float?
-  fivetran_synced                           DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([date, customer_id, fivetran_id])
-}
-
-model ad_group_stats {
-  date                               DateTime  @db.Date
-  customer_id                        Int
-  fivetran_id                        String    @map("_fivetran_id") @db.NVarChar(256)
-  impressions                        Int?
-  ad_network_type_1                  String?   @db.NVarChar(256)
-  ad_network_type_2                  String?   @db.NVarChar(256)
-  active_view_measurable_cost        Float?
-  base_campaign_id                   Int?
-  device                             String?   @db.NVarChar(256)
-  active_view_viewability            Float?
-  view_through_conversions           Int?
-  cost                               Float?
-  external_customer_id               Int?
-  active_view_impressions            Int?
-  conversions                        Float?
-  campaign_id                        Int?
-  slot                               String?   @db.NVarChar(256)
-  conversion_value                   Float?
-  interactions                       Int?
-  active_view_measurable_impressions Int?
+  ad_group_type                      String?   @db.NVarChar(256)
+  cost_per_conversion                Float?
   ad_group_id                        Int?
   clicks                             Int?
+  absolute_top_impression_percentage Float?
   base_ad_group_id                   Int?
-  interaction_types                  String?   @db.NVarChar(256)
-  active_view_measurability          Float?
   fivetran_synced                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
 
   @@id([date, customer_id, fivetran_id])
+  @@map("adgroup_performance")
 }
 
-model ad_group_targeting_setting_history {
-  ad_group_id          Int
-  sequence_id          Int
-  updated_at           DateTime  @db.DateTimeOffset
-  criterion_type_group String?   @db.NVarChar(256)
-  target_all           Boolean?
-  fivetran_synced      DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, sequence_id, updated_at])
-}
-
-model ad_history {
-  ad_group_id                             Int
-  id                                      Int
-  updated_at                              DateTime  @db.DateTimeOffset
-  ad_type                                 String?   @db.NVarChar(256)
-  automated                               Boolean?
-  base_adgroup_id                         Int?
-  base_campaign_id                        Int?
-  device_preference                       Int?
-  display_url                             String?   @db.NVarChar(256)
-  final_url_suffix                        String?   @db.NVarChar(256)
-  policy_summary_combined_approval_status String?   @db.NVarChar(256)
-  policy_summary_denormalized_status      String?   @db.NVarChar(256)
-  policy_summary_review_state             String?   @db.NVarChar(256)
-  status                                  String?   @db.NVarChar(256)
-  system_managed_entity_source            String?   @db.NVarChar(256)
-  tracking_url_template                   String?   @db.NVarChar(256)
-  url                                     String?   @db.NVarChar(256)
-  fivetran_synced                         DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, id, updated_at])
-}
-
-model ad_label_history {
-  ad_id           Int
-  label_id        Int
-  updated_at      DateTime  @db.DateTimeOffset
-  fivetran_synced DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_id, label_id, updated_at])
-}
-
-model ad_policy_evidence_history {
-  policy_topic_ad_group_id  Int
-  policy_topic_ad_id        Int
-  policy_topic_sequence_id  Int
-  sequence_id               Int
-  updated_at                DateTime  @db.DateTimeOffset
-  policy_type_evidence_type String?   @db.NVarChar(256)
-  evidence_text_list        String?   @db.NVarChar(256)
-  fivetran_synced           DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([policy_topic_ad_group_id, policy_topic_ad_id, policy_topic_sequence_id, sequence_id, updated_at])
-}
-
-model ad_policy_topic_history {
-  ad_group_id                  Int
-  ad_id                        Int
-  sequence_id                  Int
-  updated_at                   DateTime  @db.DateTimeOffset
-  policy_topic_entry_type      String?   @db.NVarChar(256)
-  policy_topic_help_center_url String?   @db.NVarChar(256)
-  policy_topic_id              String?   @db.NVarChar(256)
-  policy_topic_name            String?   @db.NVarChar(256)
-  fivetran_synced              DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, ad_id, sequence_id, updated_at])
-}
-
-model ad_stats {
+model KeywordStats {
   date                               DateTime  @db.Date
   customer_id                        Int
   fivetran_id                        String    @map("_fivetran_id") @db.NVarChar(256)
-  ad_network_type_1                  String?   @db.NVarChar(256)
-  ad_network_type_2                  String?   @db.NVarChar(256)
-  base_campaign_id                   Int?
-  view_through_conversions           Int?
+  ctr                                Float?
+  ad_group_status                    String?   @db.NVarChar(256)
+  campaign_status                    String?   @db.NVarChar(256)
+  campaign_name                      String?   @db.NVarChar(256)
+  average_cost                       Float?
+  average_cpm                        Float?
   cost                               Float?
-  active_view_impressions            Int?
-  criterion_type                     String?   @db.NVarChar(256)
+  keyword_text_matching_query        String?   @db.NVarChar(256)
+  keyword_id                         Int?
   campaign_id                        Int?
-  conversion_value                   Float?
-  active_view_measurable_impressions Int?
-  interaction_types                  String?   @db.NVarChar(256)
+  cost_per_conversion                Float?
+  absolute_top_impression_percentage Float?
+  day_of_week                        String?   @db.NVarChar(256)
   impressions                        Int?
-  active_view_measurable_cost        Float?
-  device                             String?   @db.NVarChar(256)
-  active_view_viewability            Float?
-  external_customer_id               Int?
-  is_negative                        String?   @db.NVarChar(256)
+  top_impression_percentage          Float?
+  ad_group_name                      String?   @db.NVarChar(256)
+  account_descriptive_name           String?   @db.NVarChar(256)
+  account_currency_code              String?   @db.NVarChar(256)
   conversions                        Float?
-  slot                               String?   @db.NVarChar(256)
-  id                                 Int?
-  interactions                       Int?
+  cost_per_all_conversion            Float?
+  average_cpe                        Float?
+  average_cpc                        Float?
+  customer_descriptive_name          String?   @db.NVarChar(256)
+  ad_format                          String?   @db.NVarChar(256)
   ad_group_id                        Int?
   clicks                             Int?
-  base_ad_group_id                   Int?
-  criterion_id                       Int?
-  active_view_measurability          Float?
   fivetran_synced                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
 
   @@id([date, customer_id, fivetran_id])
-}
-
-model audience_stats {
-  date                               DateTime  @db.Date
-  customer_id                        Int
-  fivetran_id                        String    @map("_fivetran_id") @db.NVarChar(256)
-  ad_network_type_1                  String?   @db.NVarChar(256)
-  ad_network_type_2                  String?   @db.NVarChar(256)
-  base_campaign_id                   Int?
-  view_through_conversions           Int?
-  cost                               Float?
-  active_view_impressions            Int?
-  campaign_id                        Int?
-  conversion_value                   Float?
-  active_view_measurable_impressions Int?
-  interaction_types                  String?   @db.NVarChar(256)
-  impressions                        Int?
-  active_view_measurable_cost        Float?
-  device                             String?   @db.NVarChar(256)
-  active_view_viewability            Float?
-  external_customer_id               Int?
-  conversions                        Float?
-  slot                               String?   @db.NVarChar(256)
-  id                                 Int?
-  interactions                       Int?
-  ad_group_id                        Int?
-  clicks                             Int?
-  base_ad_group_id                   Int?
-  active_view_measurability          Float?
-  fivetran_synced                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([date, customer_id, fivetran_id])
-}
-
-model budget_history {
-  campaign_id          Int
-  id                   Int
-  updated_at           DateTime  @db.DateTimeOffset
-  amount               Int?
-  delivery_method      String?   @db.NVarChar(256)
-  is_explicitly_shared Boolean?
-  name                 String?   @db.NVarChar(256)
-  reference_count      Int?
-  status               String?   @db.NVarChar(256)
-  fivetran_synced      DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([campaign_id, id, updated_at])
-}
-
-model campaign_conversion_optimizer_eligibility_history {
-  campaign_id      Int
-  sequence_id      Int
-  updated_at       DateTime  @db.DateTimeOffset
-  is_eligible      Boolean?
-  rejection_reason String?   @db.NVarChar(256)
-  fivetran_synced  DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([campaign_id, sequence_id, updated_at])
-}
-
-model campaign_criterion_history {
-  campaign_id                                    Int
-  id                                             Int
-  updated_at                                     DateTime  @db.DateTimeOffset
-  ad_schedule_day_of_week                        String?   @db.NVarChar(256)
-  ad_schedule_end_hour                           Int?
-  ad_schedule_end_minute                         String?   @db.NVarChar(256)
-  ad_schedule_start_hour                         Int?
-  ad_schedule_start_minute                       String?   @db.NVarChar(256)
-  age_range_type                                 String?   @db.NVarChar(256)
-  base_campaign_id                               Int?
-  bid_modifier                                   Float?
-  campaign_criterion_status                      String?   @db.NVarChar(256)
-  campaign_criterion_type                        String?   @db.NVarChar(256)
-  carrier_country_code                           String?   @db.NVarChar(256)
-  carrier_name                                   String?   @db.NVarChar(256)
-  content_label_type                             String?   @db.NVarChar(256)
-  criterion_type                                 String?   @db.NVarChar(256)
-  gender_type                                    String?   @db.NVarChar(256)
-  income_range_type                              String?   @db.NVarChar(256)
-  ip_block_ip_address                            String?   @db.NVarChar(256)
-  is_negative                                    Boolean?
-  keyword_match_type                             String?   @db.NVarChar(256)
-  keyword_text                                   String?   @db.NVarChar(256)
-  language_code                                  String?   @db.NVarChar(256)
-  language_name                                  String?   @db.NVarChar(256)
-  location_display_type                          String?   @db.NVarChar(256)
-  location_name                                  String?   @db.NVarChar(256)
-  location_parent_locations                      String?   @db.NVarChar(256)
-  location_targeting_status                      String?   @db.NVarChar(256)
-  mobile_app_category_id                         Int?
-  mobile_app_display_name                        String?   @db.NVarChar(256)
-  mobile_application_app_id                      String?   @db.NVarChar(256)
-  mobile_application_display_name                String?   @db.NVarChar(256)
-  mobile_device_manufacturer_name                String?   @db.NVarChar(256)
-  mobile_device_name                             String?   @db.NVarChar(256)
-  mobile_device_operating_system_name            String?   @db.NVarChar(256)
-  mobile_device_type                             String?   @db.NVarChar(256)
-  operating_system_name                          String?   @db.NVarChar(256)
-  operating_system_operator_type                 String?   @db.NVarChar(256)
-  operating_system_os_major_version              Int?
-  operating_system_os_minor_version              Int?
-  parent_type                                    String?   @db.NVarChar(256)
-  placement_url                                  String?   @db.NVarChar(256)
-  platform_name                                  String?   @db.NVarChar(256)
-  proximity_address_street_address               String?   @db.NVarChar(256)
-  proximity_address_street_address_2             String?   @db.NVarChar(256)
-  proximity_city_name                            String?   @db.NVarChar(256)
-  proximity_country_code                         String?   @db.NVarChar(256)
-  proximity_geo_point_latitude_in_micro_degrees  Int?
-  proximity_geo_point_longitude_in_micro_degrees Int?
-  proximity_postal_code                          String?   @db.NVarChar(256)
-  proximity_province_code                        String?   @db.NVarChar(256)
-  proximity_province_name                        String?   @db.NVarChar(256)
-  proximity_radius_distance_units                String?   @db.NVarChar(256)
-  proximity_radius_in_units                      Float?
-  user_interest_id                               Int?
-  user_interest_name                             String?   @db.NVarChar(256)
-  user_interest_parent_id                        Int?
-  user_list_eligible_for_display                 Boolean?
-  user_list_eligible_for_search                  Boolean?
-  user_list_id                                   Int?
-  user_list_membership_status                    String?   @db.NVarChar(256)
-  user_list_name                                 String?   @db.NVarChar(256)
-  vertical_id                                    Int?
-  vertical_parent_id                             Int?
-  vertical_path                                  String?   @db.NVarChar(256)
-  youtube_channel_id                             String?   @db.NVarChar(256)
-  youtube_channel_name                           String?   @db.NVarChar(256)
-  youtube_video_id                               String?   @db.NVarChar(256)
-  youtube_video_name                             String?   @db.NVarChar(256)
-  fivetran_synced                                DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([campaign_id, id, updated_at])
-}
-
-model campaign_dynamic_search_ads_setting_history {
-  campaign_id            Int
-  updated_at             DateTime  @db.DateTimeOffset
-  domain_name            String?   @db.NVarChar(256)
-  language_code          String?   @db.NVarChar(256)
-  use_supplied_urls_only Boolean?
-  fivetran_synced        DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([campaign_id, updated_at])
-}
-
-model campaign_geo_target_type_setting_history {
-  campaign_id              Int
-  updated_at               DateTime  @db.DateTimeOffset
-  negative_geo_target_type String?   @db.NVarChar(256)
-  positive_geo_target_type String?   @db.NVarChar(256)
-  fivetran_synced          DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([campaign_id, updated_at])
-}
-
-model campaign_history {
-  id                                                 Int
-  updated_at                                         DateTime  @db.DateTimeOffset
-  customer_id                                        Int?
-  ad_serving_optimization_status                     String?   @db.NVarChar(256)
-  advertising_channel_subtype                        String?   @db.NVarChar(256)
-  advertising_channel_type                           String?   @db.NVarChar(256)
-  base_campaign_id                                   Int?
-  bidding_strategy_scheme_type                       String?   @db.NVarChar(256)
-  bidding_strategy_bid_ceiling                       Int?
-  bidding_strategy_bid_changes_for_raises_only       Boolean?
-  bidding_strategy_bid_floor                         Int?
-  bidding_strategy_bid_modifier                      Float?
-  bidding_strategy_competitor_domain                 String?   @db.NVarChar(256)
-  bidding_strategy_enhanced_cpc_enabled              Boolean?
-  bidding_strategy_id                                Int?
-  bidding_strategy_max_cpc_bid_ceiling               Int?
-  bidding_strategy_max_cpc_bid_floor                 Int?
-  bidding_strategy_name                              String?   @db.NVarChar(256)
-  bidding_strategy_raise_bid_when_budget_constrained Boolean?
-  bidding_strategy_raise_bid_when_low_quality_score  Boolean?
-  bidding_strategy_source                            String?   @db.NVarChar(256)
-  bidding_strategy_spend_target                      Int?
-  bidding_strategy_strategy_goal                     String?   @db.NVarChar(256)
-  bidding_strategy_target_cpa                        Int?
-  bidding_strategy_target_outrank_share              Int?
-  bidding_strategy_target_roas                       Float?
-  bidding_strategy_target_roas_override              Float?
-  bidding_strategy_type                              String?   @db.NVarChar(256)
-  bidding_strategy_viewable_cpm_enabled              Boolean?
-  bidding_strategy_cpa_bid_amount                    Int?
-  bidding_strategy_cpc_bid_amount                    Int?
-  bidding_strategy_cpm_bid_amount                    Int?
-  campaign_group_id                                  Int?
-  campaign_trial_type                                String?   @db.NVarChar(256)
-  end_date                                           String?   @db.NVarChar(256)
-  final_url_suffix                                   String?   @db.NVarChar(256)
-  frequency_cap_impressions                          Int?
-  frequency_cap_level                                String?   @db.NVarChar(256)
-  frequency_cap_time_unit                            String?   @db.NVarChar(256)
-  name                                               String?   @db.NVarChar(256)
-  network_setting_target_content_network             Boolean?
-  network_setting_target_google_search               Boolean?
-  network_setting_target_partner_search_network      Boolean?
-  network_setting_target_search_network              Boolean?
-  serving_status                                     String?   @db.NVarChar(256)
-  start_date                                         String?   @db.NVarChar(256)
-  status                                             String?   @db.NVarChar(256)
-  tracking_url_template                              String?   @db.NVarChar(256)
-  vanity_pharma_display_url_mode                     String?   @db.NVarChar(256)
-  vanity_pharma_text                                 String?   @db.NVarChar(256)
-  fivetran_synced                                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([id, updated_at])
-}
-
-model campaign_hourly_stats {
-  date                                      DateTime  @db.Date
-  customer_id                               Int
-  fivetran_id                               String    @map("_fivetran_id") @db.NVarChar(256)
-  ctr                                       Float?
-  quarter                                   String?   @db.NVarChar(256)
-  ad_network_type_1                         String?   @db.NVarChar(256)
-  month_of_year                             String?   @db.NVarChar(256)
-  ad_network_type_2                         String?   @db.NVarChar(256)
-  base_campaign_id                          Int?
-  average_cost                              Float?
-  hour_of_day                               Int?
-  average_cpm                               Float?
-  cost                                      Float?
-  active_view_cpm                           Float?
-  month                                     String?   @db.NVarChar(256)
-  active_view_impressions                   Int?
-  gmail_secondary_clicks                    Int?
-  active_view_ctr                           Float?
-  click_type                                String?   @db.NVarChar(256)
-  campaign_group_id                         Int?
-  campaign_id                               Int?
-  cost_per_conversion                       Float?
-  conversion_value                          Float?
-  active_view_measurable_impressions        Int?
-  interaction_types                         String?   @db.NVarChar(256)
-  day_of_week                               String?   @db.NVarChar(256)
-  impressions                               Int?
-  gmail_forwards                            Int?
-  active_view_measurable_cost               Float?
-  device                                    String?   @db.NVarChar(256)
-  active_view_viewability                   Float?
-  value_per_conversion                      Float?
-  external_customer_id                      Int?
-  conversion_rate                           Float?
-  conversions                               Float?
-  gmail_saves                               Int?
-  year                                      Int?
-  average_cpc                               Float?
-  interactions                              Int?
-  clicks                                    Int?
-  week                                      String?   @db.NVarChar(256)
-  current_model_attributed_conversion_value Float?
-  active_view_measurability                 Float?
-  fivetran_synced                           DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([date, customer_id, fivetran_id])
-}
-
-model campaign_stats {
-  date                               DateTime  @db.Date
-  customer_id                        Int
-  fivetran_id                        String    @map("_fivetran_id") @db.NVarChar(256)
-  impressions                        Int?
-  ad_network_type_1                  String?   @db.NVarChar(256)
-  ad_network_type_2                  String?   @db.NVarChar(256)
-  active_view_measurable_cost        Float?
-  base_campaign_id                   Int?
-  device                             String?   @db.NVarChar(256)
-  active_view_viewability            Float?
-  view_through_conversions           Int?
-  cost                               Float?
-  external_customer_id               Int?
-  active_view_impressions            Int?
-  conversions                        Float?
-  campaign_group_id                  Int?
-  campaign_id                        Int?
-  slot                               String?   @db.NVarChar(256)
-  conversion_value                   Float?
-  interactions                       Int?
-  active_view_measurable_impressions Int?
-  clicks                             Int?
-  interaction_types                  String?   @db.NVarChar(256)
-  active_view_measurability          Float?
-  fivetran_synced                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([date, customer_id, fivetran_id])
-}
-
-model campaign_targeting_setting_history {
-  campaign_id          Int
-  sequence_id          Int
-  updated_at           DateTime  @db.DateTimeOffset
-  criterion_type_group String?   @db.NVarChar(256)
-  target_all           Boolean?
-  fivetran_synced      DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([campaign_id, sequence_id, updated_at])
-}
-
-model expanded_dynamic_search_ad_history {
-  ad_group_id     Int
-  ad_id           Int
-  updated_at      DateTime  @db.DateTimeOffset
-  description     String?   @db.NVarChar(256)
-  description_2   String?   @db.NVarChar(256)
-  fivetran_synced DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, ad_id, updated_at])
-}
-
-model expanded_text_ad_history {
-  ad_group_id      Int
-  ad_id            Int
-  updated_at       DateTime  @db.DateTimeOffset
-  description      String?   @db.NVarChar(256)
-  description_2    String?   @db.NVarChar(256)
-  head_line_part_1 String?   @db.NVarChar(256)
-  head_line_part_2 String?   @db.NVarChar(256)
-  head_line_part_3 String?   @db.NVarChar(256)
-  path_1           String?   @db.NVarChar(256)
-  path_2           String?   @db.NVarChar(256)
-  fivetran_synced  DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([ad_group_id, ad_id, updated_at])
-}
-
-model fivetran_audit {
-  id                       String    @id @db.NVarChar(256)
-  message                  String?   @db.NVarChar(256)
-  update_started           DateTime? @db.DateTimeOffset
-  update_id                String?   @db.NVarChar(256)
-  schema                   String?   @db.NVarChar(256)
-  table                    String?   @db.NVarChar(256)
-  start                    DateTime? @db.DateTimeOffset
-  done                     DateTime? @db.DateTimeOffset
-  rows_updated_or_inserted Int?
-  status                   String?   @db.NVarChar(256)
-  progress                 DateTime? @db.DateTimeOffset
-  fivetran_synced          DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-}
-
-model keyword_stats {
-  date                               DateTime  @db.Date
-  customer_id                        Int
-  fivetran_id                        String    @map("_fivetran_id") @db.NVarChar(256)
-  ad_network_type_1                  String?   @db.NVarChar(256)
-  ad_network_type_2                  String?   @db.NVarChar(256)
-  base_campaign_id                   Int?
-  view_through_conversions           Int?
-  cost                               Float?
-  active_view_impressions            Int?
-  campaign_id                        Int?
-  conversion_value                   Float?
-  active_view_measurable_impressions Int?
-  interaction_types                  String?   @db.NVarChar(256)
-  impressions                        Int?
-  active_view_measurable_cost        Float?
-  device                             String?   @db.NVarChar(256)
-  active_view_viewability            Float?
-  external_customer_id               Int?
-  conversions                        Float?
-  slot                               String?   @db.NVarChar(256)
-  id                                 Int?
-  interactions                       Int?
-  ad_group_id                        Int?
-  clicks                             Int?
-  base_ad_group_id                   Int?
-  active_view_measurability          Float?
-  fivetran_synced                    DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([date, customer_id, fivetran_id])
-}
-
-model label {
-  id                         Int       @id
-  attribute_background_color String?   @db.NVarChar(256)
-  attribute_description      String?   @db.NVarChar(256)
-  attribute_type             String?   @db.NVarChar(256)
-  label_type                 String?   @db.NVarChar(256)
-  name                       String?   @db.NVarChar(256)
-  status                     String?   @db.NVarChar(256)
-  fivetran_synced            DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-}
-
-model location {
-  campaign_id      Int
-  id               Int
-  parent_location  Int
-  updated_at       DateTime  @db.DateTimeOffset
-  display_type     String?   @db.NVarChar(256)
-  name             String?   @db.NVarChar(256)
-  targeting_status String?   @db.NVarChar(256)
-  fivetran_synced  DateTime? @map("_fivetran_synced") @db.DateTimeOffset
-
-  @@id([campaign_id, id, parent_location, updated_at])
+  @@map("keywords_performance")
 }

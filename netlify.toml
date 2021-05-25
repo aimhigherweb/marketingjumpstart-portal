@@ -5,3 +5,5 @@
   functions = "api"
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+[dev]
+  autoLaunch = false

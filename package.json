@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "npm run dev",
     "export": "next export",
-    "clean": "rm -rf .next"
+    "clean": "rm -rf .next",
+    "prisma:fetch": "prisma introspect",
+    "prisma:gen": "prisma generate"
   },
   "dependencies": {
     "@apollo/client": "^3.3.8",

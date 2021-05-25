@@ -30,8 +30,7 @@ const Dashboard = () => {
 					return (
 						<section className={styles.section}>
 							<h2>Google Ads</h2>
-							<p>Coming Soon!</p>
-							{/* <GoogleAds /> */}
+							<GoogleAds />
 						</section>
 					);
 				}
@@ -41,7 +40,7 @@ const Dashboard = () => {
 					return (
 						<section className={styles.section}>
 							<h2>Analytics</h2>
-							{/* <Analytics /> */}
+							<Analytics />
 						</section>
 					);
 				}
