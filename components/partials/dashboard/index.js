@@ -36,7 +36,7 @@ const Dashboard = () => {
 				}
 			})}
 			{brands.map((brand) => {
-				if (brand.google_analytics) {
+				if (brand.google_analytics && !brand.analytics_v4) {
 					return (
 						<section className={styles.section}>
 							<h2>Analytics</h2>

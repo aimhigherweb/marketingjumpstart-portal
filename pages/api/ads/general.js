@@ -16,8 +16,6 @@ export default async (req, res) => {
 		};
 	}
 
-	console.log({ prisma, item: prisma.accountPerformance });
-
 	const data = await prisma.accountPerformance.findMany({
 		where: {
 			customer_id: parseInt(id),
