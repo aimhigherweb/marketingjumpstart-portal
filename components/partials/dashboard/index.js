@@ -28,7 +28,7 @@ const Dashboard = () => {
 			{brands.map((brand) => {
 				if (brand.ad_id) {
 					return (
-						<section className={styles.section}>
+						<section key={brand.ad_id} className={styles.section}>
 							<h2>Google Ads</h2>
 							<GoogleAds />
 						</section>
@@ -38,7 +38,7 @@ const Dashboard = () => {
 			{brands.map((brand) => {
 				if (brand.google_analytics && !brand.analytics_v4) {
 					return (
-						<section className={styles.section}>
+						<section key={brand.google_analytics} className={styles.section}>
 							<h2>Analytics</h2>
 							<Analytics />
 						</section>
@@ -46,9 +46,9 @@ const Dashboard = () => {
 				}
 			})}
 			{socialMedias.map((item) => (
-				<section className={styles.section}>
+				<section key={JSON.stringify(item)} className={styles.section}>
 					<h2>{item.title}</h2>
-					<Approvals key={JSON.stringify(item)} {...item} />
+					<Approvals {...item} />
 				</section>
 			))}
 			{(!socialMedias || !socialMedias.length) && (

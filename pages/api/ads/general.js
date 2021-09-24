@@ -19,9 +19,13 @@ export default async (req, res) => {
 	const data = await prisma.accountPerformance.findMany({
 		where: {
 			customer_id: parseInt(id),
-			date: dateRange,
+			// date: dateRange,
 		}
 	});
+
+	console.log(id);
+	console.log(parseInt(id));
+	console.log(data);
 
 	res.status(200).json({
 		...generalProgress(data),

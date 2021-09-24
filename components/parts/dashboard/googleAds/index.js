@@ -17,6 +17,8 @@ const GoogleAds = () => {
 		}
 	], fetchData);
 
+	// console.log({ data, isLoading, error });
+
 	if (isLoading) return <p>Loading...</p>;
 
 	if (error || !data || data === {}) return <p>Something went wrong</p>;

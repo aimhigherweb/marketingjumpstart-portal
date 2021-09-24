@@ -9,14 +9,14 @@ const ClientList = () => {
 
 	return (
 		<ul>
-						{brands?.map((brand) => (
-							<li>
-								<Link href={`/clients/${brand.brand_id}`}>
-									<a>{brand.name}</a>
-								</Link>
-							</li>
-						))}
-					</ul>
+			{brands?.map((brand) => (
+				<li key={brand.brand_id}>
+					<Link href={`/clients/${brand.brand_id}`}>
+						<a>{brand.name}</a>
+					</Link>
+				</li>
+			))}
+		</ul>
 	);
 };
 
